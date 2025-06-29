@@ -1,0 +1,50 @@
+"""
+FastAPI application factory
+"""
+import os
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from presentation.rest.routes import products
+
+
+def create_app(version: str, environment: str) -> FastAPI:
+    """Create and configure FastAPI application"""
+
+    inventory_app = FastAPI(
+        root_path="/api",
+        title="Dunder Mifflin Inventory Service",
+        description="A Domain-Driven Design API for managing paper products inventory",
+        version=f"{version} - {environment}",
+    )
+
+    # Add CORS middleware
+    inventory_app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    @inventory_app.get(
+        "/",
+        include_in_schema=False,
+    )
+    async def root():
+        return {
+            "message": "Dunder Mifflin Inventory Service API",
+            "version": version,
+            "docs": "/docs",
+            "redoc": "/redoc",
+            "environment": environment,
+        }
+
+        # Include routers
+
+    inventory_app.include_router(products.router, prefix="/products", tags=["Products"])
+    return inventory_app
+
+
+app = create_app(version=os.environ["VERSION"], environment=os.environ["ENVIRONMENT"])
