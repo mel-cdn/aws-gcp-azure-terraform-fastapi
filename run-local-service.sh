@@ -5,7 +5,7 @@ set -e -u
 export PYTHONPATH=src
 
 echo "> Running local FastAPI service..."
-uvicorn src.presentation.rest.app:app \
+uvicorn src.presentation.rest.main:app \
   --env-file .env.local \
   --host 0.0.0.0 \
   --port 9000 \

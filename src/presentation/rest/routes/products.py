@@ -6,10 +6,10 @@ from typing import Optional, Union
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel
 
+from application.services.inventory_service import InventoryService
 from domain.entities.constants.product import ProductType, Unit
 from domain.repositories.product_repository import ProductRepository
 from presentation.rest.dependencies import get_inventory_service, get_product_repository
-from src.application.services.inventory_service import InventoryService
 
 router = APIRouter()
 
