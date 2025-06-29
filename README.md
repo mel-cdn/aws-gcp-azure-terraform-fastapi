@@ -9,7 +9,9 @@ application. It focuses on managing paper product inventory, sales personnel, an
 
 - Domain-Driven Design using FastAPI
 - Dockerized service
-- Google Cloud Project deployment via Terraform on CircleCI pipeline
+- Google Cloud Project (GCP) deployment
+- Amazon Web Service (AWS) deployment
+- Terraform with CircleCI deployment
 
 ## Getting Started
 
