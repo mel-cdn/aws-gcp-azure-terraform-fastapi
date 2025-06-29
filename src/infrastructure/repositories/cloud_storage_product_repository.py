@@ -9,8 +9,8 @@ from domain.repositories.product_repository import ProductRepository
 from infrastructure.database.cloud_storage import CloudStorageDatabase
 
 
-class CloudStoragePaperProductRepository(ProductRepository):
-    """Cloud Storage implementation of Paper Product repository"""
+class CloudStorageProductRepository(ProductRepository):
+    """Cloud Storage implementation of Product repository"""
 
     def __init__(self, cloud_storage_session: CloudStorageDatabase):
         self.session = cloud_storage_session

@@ -24,7 +24,6 @@ class InventoryService:
     ) -> dict:
         """Create a new paper product"""
         current_date = CommonUtil.get_current_date()
-
         model = PRODUCT_MAP[product["type"]]
         new_product = model(
             **{

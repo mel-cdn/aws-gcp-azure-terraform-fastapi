@@ -1,17 +1,13 @@
 from application.services.inventory_service import InventoryService
 from infrastructure.database.cloud_storage import get_cloud_storage_session
 from infrastructure.repositories.cloud_storage_product_repository import (
-    CloudStoragePaperProductRepository,
+    CloudStorageProductRepository,
 )
-
-# Repository dependencies
-
-# Service dependencies
 
 
 def get_cloud_storage_product_repository():
     """Get Cloud Storage product repository"""
-    return CloudStoragePaperProductRepository(cloud_storage_session=get_cloud_storage_session())
+    return CloudStorageProductRepository(cloud_storage_session=get_cloud_storage_session())
 
 
 def get_product_repository():
