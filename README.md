@@ -17,11 +17,17 @@ application. It focuses on managing paper product inventory, sales personnel, an
 
 Ensure you have the following:
 
-- [Python 3.12](https://www.python.org/)
-- [Google Cloud Project Account](https://console.cloud.google.com/)
-- [CircleCI Account](https://circleci.com/)
-- [Terraform](https://developer.hashicorp.com/terraform/install)
-- [Docker](https://docs.docker.com/get-started/)
+- **Python**
+    - Install >= [Python 3.12](https://www.python.org/)
+- **Google Cloud Project**
+    - [Google Cloud Account](https://console.cloud.google.com/)
+    - Install [gcloud CLI](https://cloud.google.com/sdk/docs/install)
+- CircleCI
+    - [CircleCI Account]((https://circleci.com/))
+- **Terraform**
+    - Install [Terraform CLI](https://developer.hashicorp.com/terraform/install)
+- **Docker**
+    - Install [Docker Desktop or CLI](https://docs.docker.com/desktop/)
 
 ### Installation
 

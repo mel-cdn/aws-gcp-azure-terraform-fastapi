@@ -51,3 +51,7 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
+
+# Terraform
+infra/terraform/*/.terraform/
+infra/terraform/*/terraform.tfstate
