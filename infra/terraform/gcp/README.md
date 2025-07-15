@@ -37,8 +37,12 @@ terraform init
 # Format files
 terraform fmt
 
+# Validate files
+terraform validate
+
 # Plan deployment
 terraform plan -var "project_id=<YOUR-PROJECT-ID>"
 
+# Apply deployment, review changes then approve
 terraform apply -var "project_id=<YOUR-PROJECT-ID>"
 ```

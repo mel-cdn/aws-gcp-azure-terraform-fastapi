@@ -9,6 +9,7 @@ dist/
 
 # Python files
 venv/
+requirements.txt
 
 # Compiled Java class files
 *.class

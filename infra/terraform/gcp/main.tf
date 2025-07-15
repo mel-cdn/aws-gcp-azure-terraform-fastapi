@@ -1,16 +1,11 @@
-resource "google_artifact_registry_repository" "docker_image_repo" {
-  repository_id = "docker-images"
-  location      = var.location
-  format        = "Docker"
-  description   = "Repository for Docker images"
-
-  lifecycle {
-    ignore_changes = []
-  }
+data "google_project" "project" {
+  project_id = var.project_id
 }
 
-data "google_artifact_registry_docker_image" "service_image" {
-  location      = google_artifact_registry_repository.docker_image_repo.location
-  repository_id = google_artifact_registry_repository.docker_image_repo.repository_id
-  image_name    = "${var.service_name}-image"
+module "docker" {
+  source     = "./modules/docker-image"
+  project_id = data.google_project.project.project_id
+  location   = var.location
+  app_name   = var.app_name
+
 }

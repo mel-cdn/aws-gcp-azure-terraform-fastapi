@@ -1,6 +1,7 @@
 variable "project_id" {
-  type    = string
-  default = "playground-mel"
+  type        = string
+  default     = "playground-mel"
+  description = "Change this to the target Google Project ID"
 }
 
 variable "location" {
@@ -8,7 +9,7 @@ variable "location" {
   default = "asia-east1"
 }
 
-variable "service_name" {
+variable "app_name" {
   type    = string
   default = "dm-inventory-service"
 }
