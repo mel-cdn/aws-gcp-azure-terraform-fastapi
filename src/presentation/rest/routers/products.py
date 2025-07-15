@@ -1,10 +1,10 @@
 """
-Product API routes
+Product API routers
 """
 from typing import Optional, Union
 
 from fastapi import APIRouter, Depends, HTTPException, Query
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from application.services.inventory_service import InventoryService
 from domain.entities.constants.product import ProductType, Unit
@@ -15,6 +15,8 @@ router = APIRouter()
 
 
 class PaperProductCreate(BaseModel):
+    model_config = ConfigDict(extra="ignore", str_strip_whitespace=True)
+
     type: ProductType
     name: str
     description: str

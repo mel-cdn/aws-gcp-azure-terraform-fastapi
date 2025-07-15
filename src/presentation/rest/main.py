@@ -6,7 +6,7 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from presentation.rest.routes import products
+from presentation.rest.routers import products
 
 
 def create_app(version: str, environment: str) -> FastAPI:
@@ -41,10 +41,9 @@ def create_app(version: str, environment: str) -> FastAPI:
             "environment": environment,
         }
 
-        # Include routers
-
-    inventory_app.include_router(products.router, prefix="/products", tags=["Products"])
     return inventory_app
 
 
 app = create_app(version=os.environ["VERSION"], environment=os.environ["ENVIRONMENT"])
+# Include routers
+app.include_router(products.router, prefix="/products", tags=["Products"])
