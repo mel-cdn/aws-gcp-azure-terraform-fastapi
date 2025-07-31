@@ -1,7 +1,7 @@
 locals {
   repo_name  = "docker-images"
   image_name = "${var.app_name}-image:latest"
-  image_tag  = "${var.location}-docker.pkg.dev/${var.project_id}/${local.repo_name}/${local.image_name}"
+  image_tag  = "${var.region}-docker.pkg.dev/${var.project_id}/${local.repo_name}/${local.image_name}"
 }
 
 
@@ -15,7 +15,7 @@ resource "google_project_service" "artifact-registry-api" {
 resource "google_artifact_registry_repository" "docker-image-repo" {
   repository_id = local.repo_name
   description   = "Repository for Docker Images"
-  location      = var.location
+  location      = var.region
   format        = "DOCKER"
 
   lifecycle {
@@ -31,13 +31,13 @@ resource "google_artifact_registry_repository" "docker-image-repo" {
 # }
 #
 #
-# resource "null_resource" "auth-docker" {
-#   provisioner "local-exec" {
-#     command = <<EOF
-#             gcloud auth configure-docker ${var.region}-docker.pkg.dev
-#         EOF
-#   }
-# }
+resource "null_resource" "auth-docker" {
+  provisioner "local-exec" {
+    command = <<EOF
+            gcloud auth configure-docker ${var.region}-docker.pkg.dev
+        EOF
+  }
+}
 #
 # resource "null_resource" "build-image" {
 #   triggers = {

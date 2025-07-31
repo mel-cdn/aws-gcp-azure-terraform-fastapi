@@ -4,7 +4,12 @@ variable "project_id" {
   description = "Change this to the target Google Project ID"
 }
 
-variable "location" {
+variable "environment" {
+  type    = string
+  default = "dev"
+}
+
+variable "region" {
   type    = string
   default = "asia-east1"
 }

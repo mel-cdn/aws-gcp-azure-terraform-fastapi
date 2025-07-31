@@ -13,10 +13,10 @@ def create_app(version: str, environment: str) -> FastAPI:
     """Create and configure FastAPI application"""
 
     inventory_app = FastAPI(
-        root_path="/api",
         title="Dunder Mifflin Inventory Service",
         description="A Domain-Driven Design API for managing paper products inventory",
         version=f"{version} - {environment}",
+        docs_url="/swagger",
     )
 
     # Add CORS middleware
