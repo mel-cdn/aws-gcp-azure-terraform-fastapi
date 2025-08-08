@@ -36,7 +36,7 @@ def create_app(version: str, environment: str) -> FastAPI:
         return {
             "message": "Dunder Mifflin Inventory Service API",
             "version": version,
-            "docs": "/docs",
+            "docs": "/swagger",
             "redoc": "/redoc",
             "environment": environment,
         }
