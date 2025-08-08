@@ -9,11 +9,15 @@ data "google_artifact_registry_docker_image" "docker-image" {
   location      = google_artifact_registry_repository.docker-image-repo.location
   repository_id = google_artifact_registry_repository.docker-image-repo.repository_id
   image_name    = local.image_name
+
+  depends_on = [
+    null_resource.push-image
+  ]
 }
 
 resource "google_project_service" "artifact-registry-api" {
   project            = var.project_id
-  service            = "containerregistry.googleapis.com"
+  service            = "artifactregistry.googleapis.com"
   disable_on_destroy = true
 }
 
@@ -35,6 +39,7 @@ resource "null_resource" "auth-docker" {
             gcloud auth configure-docker ${var.region}-docker.pkg.dev
         EOF
   }
+  depends_on = [google_project_service.artifact-registry-api]
 }
 
 resource "null_resource" "build-image" {
@@ -52,9 +57,7 @@ resource "null_resource" "build-image" {
         docker build --file=docker/Dockerfile -t ${local.image_tag} .
         EOF
   }
-  depends_on = [
-    null_resource.auth-docker
-  ]
+  depends_on = [null_resource.auth-docker]
 }
 
 resource "null_resource" "push-image" {
@@ -69,7 +72,5 @@ resource "null_resource" "push-image" {
         docker push ${local.image_tag}
         EOF
   }
-  depends_on = [
-    null_resource.build-image
-  ]
+  depends_on = [null_resource.build-image, google_artifact_registry_repository.docker-image-repo]
 }

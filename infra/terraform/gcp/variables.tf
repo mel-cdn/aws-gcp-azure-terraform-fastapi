@@ -1,7 +1,6 @@
-variable "project_id" {
-  type        = string
-  default     = "playground-mel"
-  description = "Change this to the target Google Project ID"
+variable "project_prefix" {
+  type    = string
+  default = "mel-playground"
 }
 
 variable "environment" {
