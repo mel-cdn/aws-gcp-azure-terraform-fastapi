@@ -30,6 +30,16 @@ resource "google_artifact_registry_repository" "docker-image-repo" {
   lifecycle {
     ignore_changes = []
   }
+
+  cleanup_policies {
+    id     = "keep-last-2-versions-only"
+    action = "KEEP"
+    most_recent_versions {
+      package_name_prefixes = [var.app_name]
+      keep_count = 2
+    }
+  }
+
   depends_on = [google_project_service.artifact-registry-api]
 }
 
