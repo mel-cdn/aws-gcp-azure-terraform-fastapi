@@ -15,7 +15,7 @@ def create_app(version: str, environment: str) -> FastAPI:
     inventory_app = FastAPI(
         title="Dunder Mifflin Inventory Service",
         description="A Domain-Driven Design API for managing paper products inventory",
-        version=f"{version} - {environment}",
+        version=f"{version} - {environment.upper()}",
         docs_url="/swagger",
     )
 
@@ -44,6 +44,6 @@ def create_app(version: str, environment: str) -> FastAPI:
     return inventory_app
 
 
-app = create_app(version=os.environ["VERSION"], environment=os.environ["ENVIRONMENT"])
+app = create_app(version="0.0.1", environment=os.environ["ENVIRONMENT"])
 # Include routers
 app.include_router(products.router, prefix="/products", tags=["Products"])

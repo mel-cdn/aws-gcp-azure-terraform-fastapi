@@ -1,9 +1,14 @@
-output "docker_image_name" {
-  value       = module.app_image.image_name
-  description = "Docker repository name"
+output "app_image_fq_name" {
+  value       = module.app_image.name
+  description = "Docker image fully qualified name"
 }
 
-output "docker_image_location" {
-  value       = module.app_image.image_location
-  description = "Docker image location"
+output "app_image_tag" {
+  value       = module.app_image.tag
+  description = "Docker image tag"
+}
+
+output "service_url" {
+  value       = module.app_service.url
+  description = "API service URL"
 }

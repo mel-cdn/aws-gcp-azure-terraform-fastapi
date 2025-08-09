@@ -1,24 +1,25 @@
 locals {
   working_dir = "${path.root}/../../../" # 3 levels up to the root where Docker requirements resides
   repo_name  = "docker-images"
-  image_name = "${var.app_name}-image:latest"
-  image_tag  = "${var.region}-docker.pkg.dev/${var.project_id}/${local.repo_name}/${local.image_name}"
+  image_name_latest = "${var.image_name}:latest"
+  image_tag  = "${var.region}-docker.pkg.dev/${var.project_id}/${local.repo_name}/${local.image_name_latest}"
 }
 
-data "google_artifact_registry_docker_image" "docker-image" {
-  location      = google_artifact_registry_repository.docker-image-repo.location
-  repository_id = google_artifact_registry_repository.docker-image-repo.repository_id
-  image_name    = local.image_name
-
-  depends_on = [
-    null_resource.push-image
-  ]
-}
-
+# Enable Artifact Registry
 resource "google_project_service" "artifact-registry-api" {
   project            = var.project_id
   service            = "artifactregistry.googleapis.com"
   disable_on_destroy = true
+}
+
+data "google_artifact_registry_docker_image" "image" {
+  location      = google_artifact_registry_repository.docker-image-repo.location
+  repository_id = google_artifact_registry_repository.docker-image-repo.repository_id
+  image_name    = local.image_name_latest
+
+  depends_on = [
+    null_resource.push-image
+  ]
 }
 
 resource "google_artifact_registry_repository" "docker-image-repo" {
@@ -35,7 +36,7 @@ resource "google_artifact_registry_repository" "docker-image-repo" {
     id     = "keep-last-2-versions-only"
     action = "KEEP"
     most_recent_versions {
-      package_name_prefixes = [var.app_name]
+      package_name_prefixes = [var.image_name]
       keep_count = 2
     }
   }
@@ -64,7 +65,7 @@ resource "null_resource" "build-image" {
         pipenv run pip freeze > requirements.txt
 
         echo "> Building docker image..."
-        docker build --file=docker/Dockerfile -t ${local.image_tag} .
+        docker build --platform linux/amd64 --file=docker/Dockerfile -t ${local.image_tag} .
         EOF
   }
   depends_on = [null_resource.auth-docker]

@@ -1,11 +1,11 @@
-variable "project_prefix" {
-  type    = string
-  default = "mel-playground"
-}
-
 variable "environment" {
   type    = string
   default = "dev"
+}
+
+variable "project_prefix" {
+  type    = string
+  default = "mel-playground"
 }
 
 variable "region" {
@@ -15,5 +15,5 @@ variable "region" {
 
 variable "app_name" {
   type    = string
-  default = "dm-inventory-service"
+  default = "dm-inventory"
 }
