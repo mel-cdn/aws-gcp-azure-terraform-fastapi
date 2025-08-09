@@ -19,6 +19,7 @@ module "app_service" {
   project_id          = data.google_project.project.project_id
   region              = var.region
   service_name        = local.api_name
+  service_account     = google_service_account.api_service_account.email
   container_image_tag = module.app_image.tag
 
   depends_on = [module.app_image]

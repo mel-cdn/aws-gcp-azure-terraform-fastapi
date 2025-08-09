@@ -14,6 +14,10 @@ variable "service_name" {
   type = string
 }
 
+variable "service_account" {
+  type = string
+}
+
 variable "container_image_tag" {
   type = string
 }
