@@ -55,7 +55,7 @@ resource "null_resource" "build-image" {
     working_dir = local.working_dir
     command     = <<EOF
         echo "> Extracting Python dependencies..."
-        pipenv run pip freeze > requirements.txt
+        pipenv requirements --categories default > requirements.txt
 
         echo "> Building docker image..."
         docker build --platform linux/amd64 --file=docker/Dockerfile -t ${local.image_tag_latest} .

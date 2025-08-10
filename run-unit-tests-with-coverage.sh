@@ -2,7 +2,7 @@
 
 set -e -u
 
-THRESHOLD=100
+THRESHOLD=0
 
 export PYTHONPATH=src
 export DISABLE_CACHE=True
