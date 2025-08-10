@@ -1,8 +1,10 @@
 locals {
-  working_dir = "${path.root}/../../../" # 3 levels up to the root where Docker requirements resides
-  repo_name  = "docker-images"
+  working_dir       = "${path.root}/../../../" # 3 levels up to the root where Docker requirements resides
+  repo_name         = "docker-images"
   image_name_latest = "${var.image_name}:latest"
-  image_tag  = "${var.region}-docker.pkg.dev/${var.project_id}/${local.repo_name}/${local.image_name_latest}"
+  image_tag_prefix  = "${var.region}-docker.pkg.dev/${var.project_id}/${local.repo_name}"
+  image_tag         = "${local.image_tag_prefix}/${var.image_name}"
+  image_tag_latest  = "${local.image_tag_prefix}/${local.image_name_latest}"
 }
 
 # Enable Artifact Registry
@@ -32,15 +34,6 @@ resource "google_artifact_registry_repository" "docker-image-repo" {
     ignore_changes = []
   }
 
-  cleanup_policies {
-    id     = "keep-last-2-versions-only"
-    action = "KEEP"
-    most_recent_versions {
-      package_name_prefixes = [var.image_name]
-      keep_count = 2
-    }
-  }
-
   depends_on = [google_project_service.artifact-registry-api]
 }
 
@@ -65,7 +58,7 @@ resource "null_resource" "build-image" {
         pipenv run pip freeze > requirements.txt
 
         echo "> Building docker image..."
-        docker build --platform linux/amd64 --file=docker/Dockerfile -t ${local.image_tag} .
+        docker build --platform linux/amd64 --file=docker/Dockerfile -t ${local.image_tag_latest} .
         EOF
   }
   depends_on = [null_resource.auth-docker]
@@ -80,8 +73,29 @@ resource "null_resource" "push-image" {
     working_dir = local.working_dir
     command     = <<EOF
         echo "> Pushing app image..."
-        docker push ${local.image_tag}
+        docker push ${local.image_tag_latest}
         EOF
   }
   depends_on = [null_resource.build-image, google_artifact_registry_repository.docker-image-repo]
+}
+
+resource "null_resource" "cleanup-old-images" {
+  triggers = {
+    always_run = timestamp()
+  }
+
+  provisioner "local-exec" {
+    working_dir = local.working_dir
+    command     = <<EOF
+        echo "> Cleaning up old app image..."
+        gcloud artifacts docker images list "${local.image_tag}" \
+        --include-tags \
+        --filter="tags!=latest" \
+        | grep sha256 \
+        | awk '{print $1 "@" $2}' \
+        | xargs -I {} gcloud artifacts docker images delete {} \
+        | true
+        EOF
+  }
+  depends_on = [null_resource.push-image]
 }

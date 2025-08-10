@@ -1,6 +1,6 @@
 resource "google_service_account" "api_service_account" {
   account_id   = "dm-api-sa"
-  display_name = "Dunder Mifflin Service Account"
+  display_name = "Dunder Mifflin API Service Account"
 }
 
 module "sa_roles" {

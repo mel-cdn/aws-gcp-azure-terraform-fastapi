@@ -30,9 +30,13 @@ gcloud auth application-default login
 ### Terraform Setup and Local Deployment
 1. Set working directory ```cd infra/terraform/gcp```
 2. Open `variables.tf`.
-3. Update `project_prefix` and `environment` with your GCP's deployment values.
+3. Update `project_prefix` with your GCP's deployment values. This will be appended with `ENVIRONMENT` e.g. `my-project-prefix-dev`
 4. Execute scripts below to start deployment.
 ```bash
+
+# Set workspace; This will be used as ENVIRONMENT
+terraform workspace new dev
+terraform workspace select dev
 
 # Initialize Terraform
 terraform init

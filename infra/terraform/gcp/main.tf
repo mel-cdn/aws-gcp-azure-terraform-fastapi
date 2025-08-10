@@ -1,9 +1,16 @@
-data "google_project" "project" {
-  project_id = "${var.project_prefix}-${var.environment}"
+locals {
+  environment = terraform.workspace
+  api_name    = "${var.app_name}-api"
 }
 
-locals {
-  api_name = "${var.app_name}-api"
+provider "google" {
+  project = "${var.project_prefix}-${local.environment}"
+  region  = var.region
+}
+
+
+data "google_project" "project" {
+  project_id = "${var.project_prefix}-${local.environment}"
 }
 
 module "app_image" {
@@ -15,7 +22,7 @@ module "app_image" {
 
 module "app_service" {
   source              = "./modules/cloud_run_service"
-  environment         = var.environment
+  environment         = local.environment
   project_id          = data.google_project.project.project_id
   region              = var.region
   service_name        = local.api_name

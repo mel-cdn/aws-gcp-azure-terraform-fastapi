@@ -1,8 +1,3 @@
-variable "environment" {
-  type    = string
-  default = "dev"
-}
-
 variable "project_prefix" {
   type    = string
   default = "mel-playground"

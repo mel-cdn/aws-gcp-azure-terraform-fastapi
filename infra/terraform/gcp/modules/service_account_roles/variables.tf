@@ -3,7 +3,7 @@ variable "project_id" {
 }
 
 variable "roles" {
-  type = list(string)
+  type        = list(string)
   description = "Refer to https://cloud.google.com/iam/docs/roles-overview"
 }
 

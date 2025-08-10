@@ -12,8 +12,8 @@ resource "google_cloud_run_v2_service" "service" {
   ingress             = "INGRESS_TRAFFIC_ALL"
 
   template {
-    service_account = var.service_account
-    timeout = "120s"
+    service_account                  = var.service_account
+    timeout                          = "120s"
     max_instance_request_concurrency = 1
     containers {
       image = var.container_image_tag
@@ -31,11 +31,7 @@ resource "google_cloud_run_v2_service" "service" {
         value = var.environment
       }
       env {
-        name = "CURRENT_USER"
-        value = "SYSTEM"
-      }
-      env {
-        name = "LOG_LEVEL"
+        name  = "LOG_LEVEL"
         value = "DEBUG"
       }
     }

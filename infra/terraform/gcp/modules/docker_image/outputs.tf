@@ -1,5 +1,5 @@
 output "tag" {
-  value = local.image_tag
+  value = local.image_tag_latest
 }
 
 output "name" {

@@ -9,7 +9,11 @@ from pydantic import BaseModel, ConfigDict
 from application.services.inventory_service import InventoryService
 from domain.entities.constants.product import ProductType, Unit
 from domain.repositories.product_repository import ProductRepository
-from presentation.rest.dependencies import get_inventory_service, get_product_repository
+from presentation.rest.dependencies.auth import get_current_user
+from presentation.rest.dependencies.services import (
+    get_inventory_service,
+    get_product_repository,
+)
 
 router = APIRouter()
 
@@ -31,7 +35,9 @@ class PaperProductCreate(BaseModel):
 
 @router.post("/", status_code=201)
 async def create_product(
-    product: Union[PaperProductCreate], inventory_service: InventoryService = Depends(get_inventory_service)
+    product: Union[PaperProductCreate],
+    inventory_service: InventoryService = Depends(get_inventory_service),
+    _=Depends(get_current_user),
 ):
     """Create a new product"""
     try:
@@ -46,6 +52,7 @@ async def get_products(
     limit: int = Query(100, ge=1, le=1000),
     product_type: Optional[ProductType] = Query(None),
     product_repo: ProductRepository = Depends(get_product_repository),
+    _=Depends(get_current_user),
 ):
     """Get all products with optional filtering"""
     try:

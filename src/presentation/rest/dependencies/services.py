@@ -1,3 +1,6 @@
+"""
+Services Dependencies
+"""
 from application.services.inventory_service import InventoryService
 from infrastructure.database.cloud_storage import get_cloud_storage_session
 from infrastructure.repositories.cloud_storage_product_repository import (
