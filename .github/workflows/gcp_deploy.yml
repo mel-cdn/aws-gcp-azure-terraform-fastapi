@@ -55,7 +55,7 @@ jobs:
     needs:
       - setup_environment
 #      - lint_and_unit_tests
-    environment: ${{ needs.setup_environment.outputs.target_environment }}
+    environment: dev
     runs-on: ubuntu-latest
     env:
       ENVIRONMENT: ${{ needs.setup_environment.outputs.target_environment }}
