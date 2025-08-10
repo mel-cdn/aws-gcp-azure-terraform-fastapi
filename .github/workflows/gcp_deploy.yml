@@ -69,13 +69,13 @@ jobs:
         with:
           terraform_version: 1.9.5
 
+      - name: Terraform Init
+        working-directory: ./infra/terraform/gcp
+        run: |
+          terraform init --backend-config="bucket=${TF_BACKEND_GCS_BUCKET}"
+
       - name: Set up Terraform Workspace
         working-directory: ./infra/terraform/gcp
         run: |
           terraform workspace select -or-create "${ENVIRONMENT}"
           terraform workspace list
-
-      - name: Terraform Init
-        working-directory: ./infra/terraform/gcp
-        run: |
-          terraform init --backend-config="bucket=${TF_BACKEND_GCS_BUCKET}"
