@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GOOGLE_PROJECT_PREFIX: ${{ secrets.GCP_PREFIX }}
-      GOOGLE_CREDENTIALS: ${{ secrets.GCP_DEPLOYER_KEY }}
+      # GOOGLE_CREDENTIALS: ${{ secrets.GCP_DEPLOYER_KEY }}
       TF_BACKEND_GCS_BUCKET: ${{ secrets.TF_BACKEND_GCS_BUCKET }}
       ENVIRONMENT: ${{ github.event.inputs.environment }}
 
@@ -72,6 +72,7 @@ jobs:
       - name: Set up Terraform Workspace
         run: |
           terraform workspace select -or-create "${ENVIRONMENT}"
+          terraform workspace list
 
       - name: Terraform Init
         run: |
