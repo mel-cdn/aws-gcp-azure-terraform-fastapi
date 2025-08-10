@@ -92,10 +92,7 @@ jobs:
       - name: Terraform Plan
         working-directory: ./infra/terraform/gcp
         run: |
-          terraform plan \
-            -var="project_prefix=${GOOGLE_PROJECT_PREFIX}" \
-            -var="environment=${ENVIRONMENT}" \
-            -out=tfplan
+          terraform plan -var="project_prefix=${GOOGLE_PROJECT_PREFIX}" -var="environment=${ENVIRONMENT}" -out=tfplan
 
       - name: Terraform Apply
         working-directory: ./infra/terraform/gcp
