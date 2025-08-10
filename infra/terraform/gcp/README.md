@@ -38,7 +38,7 @@ gcloud auth application-default login
 terraform workspace select -or-create dev
 
 # Initialize Terraform
-terraform init
+terraform init --backend-config="<your-gcs-bucket-for-tf-state>"
 
 # Format files
 terraform fmt

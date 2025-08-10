@@ -1,6 +1,5 @@
 variable "project_prefix" {
   type    = string
-  default = "mel-playground"
 }
 
 variable "region" {

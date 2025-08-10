@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - develop
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy (dev|prod)'
+        required: true
+        default: 'dev'
 
 jobs:
   lint_and_unit_tests:
@@ -38,6 +44,11 @@ jobs:
     name: Terraform Deployment
     needs: lint_and_unit_tests
     runs-on: ubuntu-latest
+    env:
+      GOOGLE_PROJECT_PREFIX: ${{ secrets.GCP_PREFIX }}
+      GOOGLE_CREDENTIALS: ${{ secrets.GCP_DEPLOYER_KEY }}
+      TF_BACKEND_GCS_BUCKET: ${{ secrets.TF_BACKEND_GCS_BUCKET }}
+      ENVIRONMENT: ${{ github.event.inputs.environment }}
 
     steps:
       - name: Checkout code
@@ -57,3 +68,11 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.9.5
+
+      - name: Set up Terraform Workspace
+        run: |
+          terraform workspace select -or-create ${ENVIRONMENT}
+
+      - name: Terraform Init
+        run: |
+          terraform init --backend-config="bucket=${TF_BACKEND_GCS_BUCKET}"

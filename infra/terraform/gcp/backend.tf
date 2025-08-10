@@ -1,7 +1,7 @@
 terraform {
   # Delete block if you will not use GCS as backend
   backend "gcs" {
-    bucket = "mel-pg-terraform-state"
+    bucket = "" # Will be populated on deploy or add it manually here.
     prefix = "dm-inventory"
   }
 
