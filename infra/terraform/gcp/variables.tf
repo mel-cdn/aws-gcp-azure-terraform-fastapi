@@ -1,5 +1,5 @@
 variable "project_prefix" {
-  type    = string
+  type = string
 }
 
 variable "region" {

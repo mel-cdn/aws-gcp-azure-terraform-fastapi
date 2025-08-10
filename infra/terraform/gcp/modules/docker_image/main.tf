@@ -7,7 +7,7 @@ locals {
   image_tag_latest  = "${local.image_tag_prefix}/${local.image_name_latest}"
 }
 
-# Enable Artifact Registry
+# Enable Artifact Registry API
 resource "google_project_service" "artifact-registry-api" {
   project            = var.project_id
   service            = "artifactregistry.googleapis.com"
