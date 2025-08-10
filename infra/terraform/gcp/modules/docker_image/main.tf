@@ -75,6 +75,8 @@ resource "null_resource" "push-image" {
     working_dir = local.working_dir
     command     = <<EOF
         echo "> Pushing app image..."
+        gcloud auth list
+        gcloud auth configure-docker ${var.region}-docker.pkg.dev
         docker push ${local.image_tag_latest}
         EOF
   }
