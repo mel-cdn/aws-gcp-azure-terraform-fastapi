@@ -42,7 +42,7 @@ jobs:
 
   terraform_deployment:
     name: Terraform Deployment
-    environment: ${{ github.event.inputs.environment }}
+    environment: dev
     #    needs: lint_and_unit_tests
     runs-on: ubuntu-latest
     env:
@@ -78,5 +78,5 @@ jobs:
       - name: Set up Terraform Workspace
         working-directory: ./infra/terraform/gcp
         run: |
-          terraform workspace select -or-create "${ENVIRONMENT}"
+          terraform workspace select -or-create dev
           terraform workspace list
