@@ -11,7 +11,7 @@ application. It focuses on managing paper product inventory, sales personnel, an
 - Dockerized service
 - Google Cloud Project (GCP) deployment
 - Amazon Web Service (AWS) deployment
-- Terraform with CircleCI deployment
+- Terraform with GitHub Actions deployment
 
 ## Getting Started
 
@@ -51,19 +51,35 @@ pipenv shell
 ./run-local-service.sh
 ```
 
-## Configuration
-
-Configure environment variables as needed at `.env.local`
-
 ## Testing
 
 ```bash
 
-# Run tests
+# Run pytest tests
 ./run-unit-tests-with-coverage.sh
 ```
 
-## More...
+## Deployments
+### Deployment via AWS
+- [Terraform deployment](infra/terraform/aws/README.md)
 
-- Make PaperProduct a nested object of Product
-- Add Salesman and Sales entities
+### Deployment via GCP
+- [Terraform deployment](infra/terraform/gcp/README.md)
+
+
+## To-Do's
+
+### Service
+- [X] Initial setup of FastAPI project
+- [ ] Make PaperProduct a nested object of Product
+- [ ] Add Salesman and Sales entities
+
+### Infra GCP
+- [X] Terraform deployment with GCS backend
+- [X] Initial setup of pipeline via GitHub Actions
+- [ ] Deployment to `prod` environment via pipeline
+
+
+### Infra GCP
+- [ ] Terraform deployment with S3 backend
+- [ ] Initial setup of pipeline via GitHub Actions
