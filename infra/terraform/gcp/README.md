@@ -35,8 +35,7 @@ gcloud auth application-default login
 ```bash
 
 # Set workspace; This will be used as ENVIRONMENT
-terraform workspace new dev
-terraform workspace select dev
+terraform workspace select -or-create dev
 
 # Initialize Terraform
 terraform init

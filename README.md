@@ -39,7 +39,7 @@ Ensure you have the following:
 git clone git@github.com:mel-cdn/pg-dm-inventory-service.git
 
 # Install Pipenv
-pip install pipenv
+pip install pipenv==2025.0.4
 
 # Activate Pipenv environment
 pipenv shell
