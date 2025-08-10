@@ -77,14 +77,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install pipenv==2025.0.4
 
-      - name: Authenticate to GCP
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GCP_DEPLOYER_KEY }}
-
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
         with:
@@ -100,7 +92,6 @@ jobs:
       - name: Terraform Plan
         working-directory: ./infra/terraform/gcp
         run: |
-          gcloud auth list
           terraform plan -var="project_prefix=${GOOGLE_PROJECT_PREFIX}" -var="environment=${ENVIRONMENT}" -out=tfplan
 
       - name: Terraform Apply
