@@ -8,6 +8,7 @@ on:
 
 jobs:
   setup_environment:
+    name: Determine Environment
     runs-on: ubuntu-latest
     outputs:
       target_environment: ${{ steps.set.outputs.environment }}
@@ -50,8 +51,10 @@ jobs:
 
   terraform_deployment:
     name: Terraform Deployment
+    needs:
+      - setup_environment
+      - lint_and_unit_tests
     environment: ${{ needs.setup_environment.outputs.target_environment }}
-#    needs: lint_and_unit_tests
     runs-on: ubuntu-latest
     env:
       ENVIRONMENT: ${{ needs.setup_environment.outputs.target_environment }}
