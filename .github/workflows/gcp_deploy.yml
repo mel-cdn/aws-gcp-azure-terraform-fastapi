@@ -42,7 +42,7 @@ jobs:
 
   terraform_deployment:
     name: Terraform Deployment
-    environment: dev
+    environment: ${{ github.event.inputs.environment }}
     #    needs: lint_and_unit_tests
     runs-on: ubuntu-latest
     env:
@@ -54,11 +54,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Authenticate to GCP
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GCP_DEPLOYER_KEY }}
 
 #      - name: Set up Python
 #        uses: actions/setup-python@v5
