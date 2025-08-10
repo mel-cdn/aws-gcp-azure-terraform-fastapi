@@ -39,6 +39,7 @@ resource "google_artifact_registry_repository" "docker-image-repo" {
 
 resource "null_resource" "auth-docker" {
   provisioner "local-exec" {
+    working_dir = local.working_dir
     command = <<EOF
             echo "> Authenticating to Artifact Registry..."
             gcloud auth configure-docker ${var.region}-docker.pkg.dev
