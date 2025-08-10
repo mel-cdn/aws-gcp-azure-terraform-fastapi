@@ -73,7 +73,7 @@ jobs:
       - name: Terraform Init
         working-directory: ./infra/terraform/gcp
         run: |
-          terraform init --backend-config="bucket=mel-pg-terraform-state"
+          terraform init --backend-config="bucket=${TF_BACKEND_GCS_BUCKET}"
 
       - name: Set up Terraform Workspace
         working-directory: ./infra/terraform/gcp
