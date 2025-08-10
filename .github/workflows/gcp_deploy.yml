@@ -82,6 +82,9 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_DEPLOYER_KEY }}
 
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
         with:
