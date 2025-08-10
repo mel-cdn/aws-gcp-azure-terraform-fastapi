@@ -8,7 +8,6 @@ provider "google" {
   region  = var.region
 }
 
-
 data "google_project" "project" {
   project_id = local.project_id
 }
@@ -18,6 +17,8 @@ module "app_image" {
   project_id = local.project_id
   region     = var.region
   image_name = "${local.api_name}-image"
+
+
 }
 
 module "app_service" {

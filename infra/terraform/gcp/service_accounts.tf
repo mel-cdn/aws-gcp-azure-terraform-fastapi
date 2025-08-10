@@ -1,13 +1,15 @@
 # Enable IAM API
-resource "google_project_service" "cloud-run-api" {
+resource "google_project_service" "iam-api" {
   project            = local.project_id
-  service            = "run.googleapis.com"
+  service            = "iam.googleapis.com"
   disable_on_destroy = true
 }
 
 resource "google_service_account" "api_service_account" {
   account_id   = "dm-api-sa"
   display_name = "Dunder Mifflin API Service Account"
+
+  depends_on = [google_project_service.iam-api]
 }
 
 module "sa_roles" {
