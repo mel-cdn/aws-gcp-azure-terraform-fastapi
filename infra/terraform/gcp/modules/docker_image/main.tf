@@ -37,17 +37,6 @@ resource "google_artifact_registry_repository" "docker-image-repo" {
   depends_on = [google_project_service.artifact-registry-api]
 }
 
-resource "null_resource" "auth-docker" {
-  provisioner "local-exec" {
-    working_dir = local.working_dir
-    command = <<EOF
-            echo "> Authenticating to Artifact Registry..."
-            gcloud auth configure-docker ${var.region}-docker.pkg.dev
-        EOF
-  }
-  depends_on = [google_project_service.artifact-registry-api]
-}
-
 resource "null_resource" "build-image" {
   triggers = {
     always_run = timestamp()
@@ -63,7 +52,7 @@ resource "null_resource" "build-image" {
         docker build --platform linux/amd64 --file=docker/Dockerfile -t ${local.image_tag_latest} .
         EOF
   }
-  depends_on = [null_resource.auth-docker]
+  depends_on = [google_project_service.artifact-registry-api]
 }
 
 resource "null_resource" "push-image" {
@@ -74,9 +63,10 @@ resource "null_resource" "push-image" {
   provisioner "local-exec" {
     working_dir = local.working_dir
     command     = <<EOF
-        echo "> Pushing app image..."
-        gcloud auth list
+        echo "> Authenticating to Artifact Registry..."
         gcloud auth configure-docker ${var.region}-docker.pkg.dev
+
+        echo "> Pushing app image..."
         docker push ${local.image_tag_latest}
         EOF
   }
