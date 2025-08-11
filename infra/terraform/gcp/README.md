@@ -27,7 +27,7 @@ Updated property [core/project].
 gcloud auth application-default login
 ```
 
-### Terraform Setup and Local Deployment
+## Terraform Setup and Local Deployment
 1. Set working directory ```cd infra/terraform/gcp```
 2. Open `variables.tf`.
 3. Update `project_prefix` with your GCP's deployment values. This will be appended with `ENVIRONMENT` e.g. `my-project-prefix-dev`
@@ -51,4 +51,47 @@ terraform plan
 
 # Apply, review changes then approve
 terraform apply
+```
+
+## CI/CD Deployer Service Account Setup
+> In this project, we use [GitHub Actions](https://github.com/features/actions). Refer to this [deployment template](../../../.github/workflows/gcp_deploy.yml).
+
+Create a service account for CI/CD deployment and assign required roles.
+
+```bash
+
+#!/usr/bin/env bash
+
+set -e -u
+
+PROJECT_ID="my-gcp-project-id"
+SA_NAME="terraform-deployer-test"
+SA_DISPLAY_NAME="CI/CD Deployer"
+ROLES=(
+  "roles/serviceusage.serviceUsageAdmin"  # Service Usage Admin for Google APIs management (enable/disable)
+  "roles/storage.admin"                   # Storage Admin for Terraform backend GCS bucket
+  "roles/run.admin"                       # Cloud Run Admin for Cloud Run Service deployments
+  "roles/iam.serviceAccountAdmin"         # Service Account Admin for management for service API account (create/update)
+  "roles/resourcemanager.projectIamAdmin" # Service Usage Admin for creating and assigning roles to service account
+  "roles/artifactregistry.admin"          # Artifact Registry Administrator for managing Docker repositories/images management (create/delete)
+)
+
+# ROLES=("roles/owner") # Use this, if you don't mind giving super powers
+
+# 1. Create service account
+gcloud iam service-accounts create $SA_NAME \
+  --project $PROJECT_ID \
+  --display-name "$SA_DISPLAY_NAME"
+
+SA_EMAIL="$SA_NAME@$PROJECT_ID.iam.gserviceaccount.com"
+
+# 2. Assign roles
+for ROLE in "${ROLES[@]}"; do
+  echo "Assigning $ROLE to $SA_EMAIL"
+  gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:$SA_EMAIL" \
+    --role="$ROLE"
+done
+
+echo "✅ Service account $SA_EMAIL created and roles assigned."
 ```

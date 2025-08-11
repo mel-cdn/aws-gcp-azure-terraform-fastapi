@@ -77,7 +77,8 @@ pipenv shell
 ### Infra GCP
 - [X] Terraform deployment with GCS backend
 - [X] Initial setup of pipeline via GitHub Actions
-- [ ] Deployment to `prod` environment via pipeline
+- [X] Deployment to `prod` environment via pipeline
+- [ ] Link service to domain name
 
 
 ### Infra GCP
