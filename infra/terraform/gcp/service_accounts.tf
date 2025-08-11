@@ -16,6 +16,7 @@ module "sa_roles" {
   source     = "./modules/service_account_roles"
   project_id = local.project_id
   roles = [
+    "roles/iam.serviceAccountUser",
     "roles/storage.admin",
     "roles/datastore.user",
   ]
