@@ -47,10 +47,6 @@ resource "google_artifact_registry_repository" "docker-image-repo" {
 }
 
 resource "null_resource" "build-image" {
-  triggers = {
-    always_run = timestamp()
-  }
-
   provisioner "local-exec" {
     working_dir = local.working_dir
     command     = <<EOF
@@ -65,10 +61,6 @@ resource "null_resource" "build-image" {
 }
 
 resource "null_resource" "push-image" {
-  triggers = {
-    always_run = timestamp()
-  }
-
   provisioner "local-exec" {
     working_dir = local.working_dir
     command     = <<EOF
