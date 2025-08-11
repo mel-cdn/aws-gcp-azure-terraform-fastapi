@@ -24,8 +24,6 @@ Ensure you have the following:
 - **Google Cloud Project**
     - [Google Cloud Account](https://console.cloud.google.com/)
     - Install [gcloud CLI](https://cloud.google.com/sdk/docs/install)
-- CircleCI
-    - [CircleCI Account]((https://circleci.com/))
 - **Terraform**
     - Install [Terraform CLI](https://developer.hashicorp.com/terraform/install)
 - **Docker**

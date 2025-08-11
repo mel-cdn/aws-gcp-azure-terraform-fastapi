@@ -65,7 +65,7 @@ Create a service account for CI/CD deployment and assign required roles.
 set -e -u
 
 PROJECT_ID="my-gcp-project-id"
-SA_NAME="terraform-deployer-test"
+SA_NAME="terraform-deployer"
 SA_DISPLAY_NAME="CI/CD Deployer"
 ROLES=(
   "roles/serviceusage.serviceUsageAdmin"  # Service Usage Admin for Google APIs management (enable/disable)
