@@ -63,10 +63,14 @@ pipenv shell
 ./run-unit-tests-with-coverage.sh
 ```
 
-## Infrastructure as Code (IAC) Deployments
-
+## API Deployments
+### Infrastructure as Code (IAC)
 - [AWS via Terraform](infra/terraform/aws/README.md)
 - [GCP via Terraform](infra/terraform/gcp/README.md)
+### FastAPI Endpoints
+- [DEV: AWS Hosted](https://www.powerthesaurus.org/not_yet_available)
+- [DEV: GCP Hosted](https://dm-inventory-api-ssivswgqkq-de.a.run.app/swagger)
+
 
 ## To-Do
 
