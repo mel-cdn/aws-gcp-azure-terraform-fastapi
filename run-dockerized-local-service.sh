@@ -9,4 +9,4 @@ echo "> Building docker image..."
 docker build --file=docker/Dockerfile -t dm-inventory-service .
 
 echo "> Running FastAPI service on http://0.0.0.0:8000..."
-docker run --env-file .env.local -p 8000:8080 dm-inventory-service
+docker run --env-file environment/.env.dev -p 8000:8080 dm-inventory-service
