@@ -8,10 +8,6 @@ provider "google" {
   region  = var.region
 }
 
-data "google_project" "project" {
-  project_id = local.project_id
-}
-
 module "app_image" {
   source     = "./modules/docker_image"
   project_id = local.project_id
