@@ -1,5 +1,5 @@
 locals {
-  working_dir = "${path.root}/../../../" # 3 levels up to the root where Docker requirements resides
+  working_dir       = "${path.root}/../../../" # 3 levels up to the root where Docker requirements resides
   repo_name         = "docker-images"
   image_name_latest = "${var.image_name}:latest"
   image_tag_prefix  = "${var.region}-docker.pkg.dev/${var.project_id}/${local.repo_name}"
@@ -35,7 +35,7 @@ resource "google_artifact_registry_repository" "docker-image-repo" {
     action = "KEEP"
     most_recent_versions {
       package_name_prefixes = [var.image_name]
-      keep_count = 2
+      keep_count            = 2
     }
   }
 
@@ -47,6 +47,10 @@ resource "google_artifact_registry_repository" "docker-image-repo" {
 }
 
 resource "null_resource" "build-image" {
+  triggers = {
+    always_run = timestamp()
+  }
+
   provisioner "local-exec" {
     working_dir = local.working_dir
     command     = <<EOF
@@ -61,6 +65,10 @@ resource "null_resource" "build-image" {
 }
 
 resource "null_resource" "push-image" {
+  triggers = {
+    always_run = timestamp()
+  }
+
   provisioner "local-exec" {
     working_dir = local.working_dir
     command     = <<EOF
