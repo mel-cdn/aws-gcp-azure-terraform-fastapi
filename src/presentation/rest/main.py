@@ -28,13 +28,10 @@ def create_app(version: str, environment: str) -> FastAPI:
         allow_headers=["*"],
     )
 
-    @inventory_app.get(
-        "/",
-        include_in_schema=False,
-    )
+    @inventory_app.get("/", include_in_schema=False)
     async def root():
         return {
-            "message": "Dunder Mifflin Inventory Service API",
+            "message": f"Welcome to {inventory_app.title}!",
             "version": version,
             "docs": "/swagger",
             "redoc": "/redoc",
