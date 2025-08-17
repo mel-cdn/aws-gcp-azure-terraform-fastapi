@@ -28,6 +28,7 @@ gcloud auth application-default login
 ```
 
 ## Terraform Setup and Local Deployment
+> Assuming that the authenticated account has the right privileges
 1. Set working directory ```cd infra/terraform/gcp```
 2. Open `variables.tf`.
 3. Update `project_prefix` with your GCP's deployment values. This will be appended with `ENVIRONMENT` e.g. `my-project-prefix-dev`
@@ -57,16 +58,17 @@ terraform apply
 > In this project, we use [GitHub Actions](https://github.com/features/actions). Refer to this [deployment template](../../../.github/workflows/gcp_deploy.yml).
 
 Create a service account for CI/CD deployment and assign required roles.
-
+> Assuming that the authenticated account has the right privileges
 ```bash
 
 #!/usr/bin/env bash
 
 set -e -u
 
-PROJECT_ID="my-gcp-project-id"
-SA_NAME="terraform-deployer"
-SA_DISPLAY_NAME="CI/CD Deployer"
+PROJECT_ID="my-project-id"
+SA_NAME="dm-terraform-deployer"
+SA_DISPLAY_NAME="Dunder Mifflin Terraform Deployer"
+DESCRIPTION="CI/CD Service Account for Terraform"
 ROLES=(
   "roles/serviceusage.serviceUsageAdmin"  # Service Usage Admin for Google APIs management (enable/disable)
   "roles/storage.admin"                   # Storage Admin for Terraform backend GCS bucket
@@ -81,7 +83,8 @@ ROLES=(
 # 1. Create service account
 gcloud iam service-accounts create $SA_NAME \
   --project $PROJECT_ID \
-  --display-name "$SA_DISPLAY_NAME"
+  --display-name "$SA_DISPLAY_NAME" \
+  --description "$DESCRIPTION"
 
 SA_EMAIL="$SA_NAME@$PROJECT_ID.iam.gserviceaccount.com"
 
@@ -93,5 +96,5 @@ for ROLE in "${ROLES[@]}"; do
     --role="$ROLE"
 done
 
-echo "✅ Service account $SA_EMAIL created and roles assigned."
+echo "Service account $SA_EMAIL created and roles assigned!"
 ```
