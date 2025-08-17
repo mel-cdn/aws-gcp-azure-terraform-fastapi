@@ -77,12 +77,13 @@ SA_NAME="dm-terraform-deployer"
 SA_DISPLAY_NAME="Dunder Mifflin Terraform Deployer"
 DESCRIPTION="CI/CD Service Account for Terraform"
 ROLES=(
-  "roles/serviceusage.serviceUsageAdmin"  # Service Usage Admin for Google APIs management (enable/disable)
-  "roles/storage.admin"                   # Storage Admin for Terraform backend GCS bucket
-  "roles/run.admin"                       # Cloud Run Admin for Cloud Run Service deployments
-  "roles/iam.serviceAccountAdmin"         # Service Account Admin for management for service API account (create/update)
-  "roles/resourcemanager.projectIamAdmin" # Service Usage Admin for creating and assigning roles to service account
-  "roles/artifactregistry.admin"          # Artifact Registry Administrator for managing Docker repositories/images management (create/delete)
+  "roles/serviceusage.serviceUsageAdmin"  # Service Usage Admin: Google APIs management (enable/disable)
+  "roles/storage.admin"                   # Storage Admin: Terraform backend GCS bucket
+  "roles/run.admin"                       # Cloud Run Admin: Cloud Run Service deployments
+  "roles/iam.serviceAccountUser"          # Service Account User: Deploying Cloud Run Service with Service Account
+  "roles/iam.serviceAccountAdmin"         # Service Account Admin: Management for service API account (create/update)
+  "roles/resourcemanager.projectIamAdmin" # Service Usage Admin: Creating and assigning roles to service account
+  "roles/artifactregistry.admin"          # Artifact Registry Administrator: Managing Docker repositories/images management (create/delete)  
 )
 
 # ROLES=("roles/owner") # Use this, if you don't mind giving super powers
