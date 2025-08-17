@@ -1,9 +1,12 @@
 locals {
+  normalized_billing_labels = {
+    for k, v in var.billing_labels : lower(k) => lower(v)
+  }
   working_dir       = "${path.root}/../../../" # 3 levels up to the root where Docker requirements resides
   repo_name         = "docker-images"
   image_name_latest = "${var.image_name}:latest"
   image_tag_prefix  = "${var.region}-docker.pkg.dev/${var.project_id}/${local.repo_name}"
-  image_tag         = "${local.image_tag_prefix}/${var.image_name}"
+  image_tag         = "${local.image_tag_prefix}/${var.image_name}" # For cleanup
   image_tag_latest  = "${local.image_tag_prefix}/${local.image_name_latest}"
 }
 
@@ -22,6 +25,7 @@ data "google_artifact_registry_docker_image" "image" {
   depends_on = [
     null_resource.push-image
   ]
+
 }
 
 resource "google_artifact_registry_repository" "docker-image-repo" {
@@ -43,6 +47,7 @@ resource "google_artifact_registry_repository" "docker-image-repo" {
     ignore_changes = []
   }
 
+  labels     = local.normalized_billing_labels
   depends_on = [google_project_service.artifact-registry-api]
 }
 

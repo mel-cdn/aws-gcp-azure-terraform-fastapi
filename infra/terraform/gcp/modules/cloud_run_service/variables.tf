@@ -21,3 +21,8 @@ variable "service_account" {
 variable "container_image_tag" {
   type = string
 }
+
+variable "billing_labels" {
+  type        = map(string)
+  description = "Labels for billing/cost allocation"
+}

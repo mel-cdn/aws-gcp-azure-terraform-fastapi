@@ -1,3 +1,8 @@
+locals {
+  normalized_billing_labels = {
+    for k, v in var.billing_labels : lower(k) => lower(v)
+  }
+}
 # Enable Cloud Run API
 resource "google_project_service" "cloud-run-api" {
   project            = var.project_id
@@ -41,6 +46,7 @@ resource "google_cloud_run_v2_service" "service" {
     }
   }
 
+  labels     = local.normalized_billing_labels
   depends_on = [google_project_service.cloud-run-api]
 }
 
