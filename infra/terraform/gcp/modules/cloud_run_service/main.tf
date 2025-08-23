@@ -7,9 +7,10 @@ locals {
 resource "google_project_service" "cloud-run-api" {
   project            = var.project_id
   service            = "run.googleapis.com"
-  disable_on_destroy = true
+  disable_on_destroy = false
 }
 
+# Build resources
 resource "google_cloud_run_v2_service" "service" {
   name                = var.service_name
   location            = var.region
@@ -21,7 +22,7 @@ resource "google_cloud_run_v2_service" "service" {
     timeout                          = "120s"
     max_instance_request_concurrency = 1
     containers {
-      image = var.container_image_tag
+      image = var.container_image
       ports {
         container_port = 8080
       }
@@ -44,6 +45,10 @@ resource "google_cloud_run_v2_service" "service" {
       max_instance_count = 1
       min_instance_count = 0
     }
+  }
+  traffic {
+    type    = "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST"
+    percent = 100
   }
 
   labels     = local.normalized_billing_labels
