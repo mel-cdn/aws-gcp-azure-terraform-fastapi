@@ -36,7 +36,7 @@ cd infra/terraform/gcp
 2. Open `variables.tf` and update the `project_prefix` variable with your GCP project’s deployment prefix.
    - This value will be appended with the `ENVIRONMENT`.
    - **Example**: If `ENVIRONMENT` = `dev`, and `project_prefix` = `my-project-prefix`, the final project ID will be `my-project-prefix-dev`.
-
+    > You may also use [.tfvars](https://developer.hashicorp.com/terraform/language/values/variables#assigning-values-to-root-module-variables).
 3. Run the following commands to initialize and deploy:
 ```bash
 
