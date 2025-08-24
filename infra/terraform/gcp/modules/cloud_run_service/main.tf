@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "6.8.0"
+    }
+  }
+}
+
 locals {
   normalized_billing_labels = {
     for k, v in var.billing_labels : lower(k) => lower(v)

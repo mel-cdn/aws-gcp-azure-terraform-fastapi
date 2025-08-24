@@ -1,10 +1,18 @@
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "6.8.0"
+    }
+  }
+}
+
 locals {
   normalized_billing_labels = {
     for k, v in var.billing_labels : lower(k) => lower(v)
   }
   working_dir      = "${path.root}/../../../" # 3 levels up to the root where Docker requirements resides
-  repo_name        = "docker-images"
-  image_tag_prefix = "${var.region}-docker.pkg.dev/${var.project_id}/${local.repo_name}"
+  image_tag_prefix = "${var.region}-docker.pkg.dev/${var.project_id}/${var.repo_name}"
 
   image_tag        = "${local.image_tag_prefix}/${var.image_name}" # For cleanup old images
   image_tag_latest = "${local.image_tag_prefix}/${var.image_name}:latest"
@@ -38,7 +46,7 @@ data "local_file" "image_digest" {
 
 # Build image and resources
 resource "google_artifact_registry_repository" "docker-image-repo" {
-  repository_id = local.repo_name
+  repository_id = var.repo_name
   description   = "Repository for Docker Images"
   location      = var.region
   format        = "DOCKER"

@@ -13,9 +13,10 @@ provider "google" {
 }
 
 module "app_image" {
-  source         = "./modules/docker_image"
+  source         = "./modules/artifact_registry"
   project_id     = local.project_id
   region         = var.region
+  repo_name      = "docker-images"
   image_name     = "${local.api_name}-image"
   billing_labels = local.billing_labels
 }

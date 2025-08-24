@@ -6,10 +6,6 @@ output "name" {
   value = data.google_artifact_registry_docker_image.image.name
 }
 
-output "latest_tag" {
-  value = local.image_tag_latest
-}
-
 output "latest_digest" {
   value = jsondecode(data.local_file.image_digest.content).digest
 }
