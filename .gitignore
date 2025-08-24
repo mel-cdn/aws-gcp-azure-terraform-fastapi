@@ -55,7 +55,7 @@ Thumbs.db
 
 # Terraform
 infra/terraform/*/.terraform/
-infra/terraform/*/terraform.tfstate
-/infra/terraform/gcp/terraform.tfstate.backup
+*.tfstate
+*.tfstate.backup
 *.tfvars
 *digest.json
