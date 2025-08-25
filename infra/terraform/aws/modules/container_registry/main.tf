@@ -13,13 +13,14 @@ locals {
   }
   working_dir      = "${path.root}/../../../" # 3 levels up to the root where Docker requirements resides
   image_tag_prefix = aws_ecr_repository.docker-image-repo.repository_url
-
   image_tag_latest = "${local.image_tag_prefix}:latest"
 }
 
 data "aws_caller_identity" "current" {}
 
-# Build image and resources
+# ----------------------------------------------------------------------------------------------------------------------
+# ECR (Docker Repository)
+# ----------------------------------------------------------------------------------------------------------------------
 resource "aws_ecr_repository" "docker-image-repo" {
   name                 = var.repo_name
   image_tag_mutability = "MUTABLE"
@@ -31,6 +32,9 @@ resource "aws_ecr_repository" "docker-image-repo" {
   tags = local.normalized_billing_tags
 }
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Build Docker image
+# ----------------------------------------------------------------------------------------------------------------------
 resource "null_resource" "build-image" {
   triggers = {
     always_run = timestamp()
@@ -49,6 +53,9 @@ resource "null_resource" "build-image" {
   depends_on = [aws_ecr_repository.docker-image-repo]
 }
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Push Docker image to ECR
+# ----------------------------------------------------------------------------------------------------------------------
 resource "null_resource" "push-image" {
   triggers = {
     always_run = timestamp()

@@ -1,7 +1,4 @@
-output "ecr_repo_url" {
-  value = module.app_image.repo_url
-}
-
-output "ecr_repo_arn" {
-  value = module.app_image.repo_arn
+output "service_url" {
+  value       = "https://${module.app_service.url}"
+  description = "API service URL"
 }

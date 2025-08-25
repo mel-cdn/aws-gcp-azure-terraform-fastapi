@@ -1,7 +1,7 @@
 locals {
   billing_labels = {
-    Environment = var.environment
-    Application = var.app_name
+    environment = var.environment
+    application = var.app_name
   }
   project_id = "${var.project_prefix}-${var.environment}"
   api_name   = "${var.app_name}-api"

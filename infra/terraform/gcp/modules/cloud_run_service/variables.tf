@@ -1,5 +1,5 @@
 variable "billing_labels" {
-  type = map(string)
+  type        = map(string)
   description = "Labels for billing/cost allocation"
 }
 
