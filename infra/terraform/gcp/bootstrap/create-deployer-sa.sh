@@ -4,7 +4,7 @@ set -e -u
 
 # Run this with an authenticated account that has sufficient IAM privileges.
 
-echo "Creating SA for project: $1"
+echo "> Creating SA for project: $1"
 
 PROJECT_ID="$1"
 SA_NAME="dm-terraform-deployer"
@@ -38,4 +38,4 @@ for ROLE in "${ROLES[@]}"; do
     --role="$ROLE"
 done
 
-echo "Service account $SA_EMAIL created and roles assigned!"
+echo "> Service account $SA_EMAIL created and roles assigned!"

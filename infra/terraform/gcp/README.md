@@ -59,14 +59,22 @@ terraform plan
 terraform apply
 ```
 
-## CI/CD Deployer Service Account Setup
+## Setup CI/CD Deployment
+### Enable API Services
+
+```bash
+# Run this with an authenticated account that has sufficient IAM privileges.
+./bootstrap/enable-gcp-services.sh
+```
+
+### Create a Deployer Service Account
+
 This project uses [GitHub Actions](https://github.com/features/actions) for CI/CD.
 Refer to the [deployment workflow template](../../../.github/workflows/gcp_deploy.yml) for integration.
 
-### Create a Service Account
 The following script creates a CI/CD service account and assigns the required roles.
 ```bash
-# Run this with an authenticated account that has sufficient IAM privileges.
+# Run these with an authenticated account that has sufficient IAM privileges.
 ./bootstrap/create-deployer-sa.sh mel-playground-dev
 ```
 

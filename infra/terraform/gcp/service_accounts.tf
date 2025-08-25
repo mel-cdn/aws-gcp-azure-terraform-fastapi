@@ -17,8 +17,6 @@ module "sa_roles" {
   project_id = local.project_id
   roles = [
     "roles/iam.serviceAccountUser",
-    "roles/storage.admin",
-    "roles/datastore.user",
   ]
   email = google_service_account.api_service_account.email
 }
