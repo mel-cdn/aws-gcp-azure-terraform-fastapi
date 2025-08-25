@@ -12,6 +12,9 @@ provider "google" {
   region  = var.region
 }
 
+# ----------------------------------------------------------------------------------------------------------------------
+# App Docker Image
+# ----------------------------------------------------------------------------------------------------------------------
 module "app_image" {
   source         = "./modules/artifact_registry"
   project_id     = local.project_id
@@ -21,6 +24,9 @@ module "app_image" {
   billing_labels = local.billing_labels
 }
 
+# ----------------------------------------------------------------------------------------------------------------------
+# App Cloud Run Service
+# ----------------------------------------------------------------------------------------------------------------------
 module "app_service" {
   source          = "./modules/cloud_run_service"
   environment     = var.environment

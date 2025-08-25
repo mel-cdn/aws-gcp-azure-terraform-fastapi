@@ -1,3 +1,8 @@
+variable "billing_labels" {
+  type = map(string)
+  description = "Labels for billing/cost allocation"
+}
+
 variable "environment" {
   type = string
 }
@@ -28,9 +33,4 @@ Container image reference for the Cloud Run service.
 - Use a tag reference (<image>:latest or <image>:<tag>) if you want Cloud Run to redeploy
   whenever the tag is updated, but be aware this is not guaranteed to trigger a new revision.
 EOT
-}
-
-variable "billing_labels" {
-  type        = map(string)
-  description = "Labels for billing/cost allocation"
 }

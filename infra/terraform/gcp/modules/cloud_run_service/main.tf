@@ -12,14 +12,19 @@ locals {
     for k, v in var.billing_labels : lower(k) => lower(v)
   }
 }
+
+# ----------------------------------------------------------------------------------------------------------------------
 # Enable Cloud Run API
+# ----------------------------------------------------------------------------------------------------------------------
 resource "google_project_service" "cloud-run-api" {
   project            = var.project_id
   service            = "run.googleapis.com"
   disable_on_destroy = false
 }
 
-# Build resources
+# ----------------------------------------------------------------------------------------------------------------------
+# Create Cloud Run Service
+# ----------------------------------------------------------------------------------------------------------------------
 resource "google_cloud_run_v2_service" "service" {
   name                = var.service_name
   location            = var.region
@@ -64,6 +69,9 @@ resource "google_cloud_run_v2_service" "service" {
   depends_on = [google_project_service.cloud-run-api]
 }
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Set Authentication
+# ----------------------------------------------------------------------------------------------------------------------
 resource "google_cloud_run_service_iam_member" "authentication" {
   location = google_cloud_run_v2_service.service.location
   project  = google_cloud_run_v2_service.service.project

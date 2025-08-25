@@ -1,3 +1,8 @@
+variable "billing_labels" {
+  type = map(string)
+  description = "Labels for billing/cost allocation"
+}
+
 variable "project_id" {
   type = string
 }
@@ -12,9 +17,4 @@ variable "repo_name" {
 
 variable "image_name" {
   type = string
-}
-
-variable "billing_labels" {
-  type        = map(string)
-  description = "Labels for billing/cost allocation"
 }

@@ -18,14 +18,18 @@ locals {
   image_tag_latest = "${local.image_tag_prefix}/${var.image_name}:latest"
 }
 
+# ----------------------------------------------------------------------------------------------------------------------
 # Enable Artifact Registry API
+# ----------------------------------------------------------------------------------------------------------------------
 resource "google_project_service" "artifact-registry-api" {
   project            = var.project_id
   service            = "artifactregistry.googleapis.com"
   disable_on_destroy = false
 }
 
+# ----------------------------------------------------------------------------------------------------------------------
 # Retrieve created resources for outputs
+# ----------------------------------------------------------------------------------------------------------------------
 data "google_artifact_registry_docker_image" "image" {
   location      = google_artifact_registry_repository.docker-image-repo.location
   repository_id = google_artifact_registry_repository.docker-image-repo.repository_id
@@ -44,7 +48,9 @@ data "local_file" "image_digest" {
   ]
 }
 
-# Build image and resources
+# ----------------------------------------------------------------------------------------------------------------------
+# Artifact Registry (Docker Repository)
+# ----------------------------------------------------------------------------------------------------------------------
 resource "google_artifact_registry_repository" "docker-image-repo" {
   repository_id = var.repo_name
   description   = "Repository for Docker Images"
@@ -59,6 +65,9 @@ resource "google_artifact_registry_repository" "docker-image-repo" {
   depends_on = [google_project_service.artifact-registry-api]
 }
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Build Docker image
+# ----------------------------------------------------------------------------------------------------------------------
 resource "null_resource" "build-image" {
   triggers = {
     always_run = timestamp()
@@ -77,6 +86,9 @@ resource "null_resource" "build-image" {
   depends_on = [google_project_service.artifact-registry-api]
 }
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Push Docker image
+# ----------------------------------------------------------------------------------------------------------------------
 resource "null_resource" "push-image" {
   triggers = {
     always_run = timestamp()
@@ -100,6 +112,9 @@ resource "null_resource" "push-image" {
   depends_on = [null_resource.build-image, google_artifact_registry_repository.docker-image-repo]
 }
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Cleanup old Docker images
+# ----------------------------------------------------------------------------------------------------------------------
 resource "null_resource" "cleanup-old-images" {
   triggers = {
     always_run = timestamp()
