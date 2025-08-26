@@ -64,7 +64,13 @@ terraform apply
 
 ```bash
 # Run this with an authenticated account that has sufficient IAM privileges.
-./bootstrap/enable-gcp-services.sh
+./bootstrap/enable-gcp-services.sh <my-project-id>
+```
+
+### Create a Terraform State Bucket
+```bash
+# Run these with an authenticated account that has sufficient IAM privileges.
+./bootstrap/create-terraform-state-bucket.sh <my-project_id> <bucket-name> <region>
 ```
 
 ### Create a Deployer Service Account
@@ -75,15 +81,16 @@ Refer to the [deployment workflow template](../../../.github/workflows/gcp_deplo
 The following script creates a CI/CD service account and assigns the required roles.
 ```bash
 # Run these with an authenticated account that has sufficient IAM privileges.
-./bootstrap/create-deployer-sa.sh mel-playground-dev
+./bootstrap/create-deployer-sa.sh <my-project-id>
 ```
+
 
 ### GitHub Actions Setup
 
 Once your service account has been created, complete the following steps to integrate it with GitHub Actions:
 1. Generate Service Account Key
 ```bash
-
+# Run these with an authenticated account that has sufficient IAM privileges.
 gcloud iam service-accounts keys create key.json \
   --iam-account=$SA_EMAIL \
   --project=$PROJECT_ID

@@ -2,9 +2,11 @@
 
 set -e -u
 
-# Run this with an authenticated account that has sufficient IAM privileges.
+# Run this with an authenticated GCP IAM account that has permissions to create IAM users, roles, and policies.
+# Example usage:
+#   ./create_deployer-sa.sh <project_id>
 
-echo "> Creating SA for project: $1"
+echo "> Creating Deployer SA for project: $1"
 
 PROJECT_ID="$1"
 SA_NAME="dm-terraform-deployer"
