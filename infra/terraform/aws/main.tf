@@ -3,8 +3,7 @@ locals {
     environment = var.environment
     application = var.app_name
   }
-
-  api_name = "${var.app_name}-api"
+  resource_prefix = "${var.infra}-${var.app_name}-${var.environment}"
 }
 
 provider "aws" {
@@ -14,13 +13,14 @@ provider "aws" {
 # ----------------------------------------------------------------------------------------------------------------------
 # App Docker Image
 # ----------------------------------------------------------------------------------------------------------------------
-module "app_image" {
-  source    = "./modules/container_registry"
-  region    = var.region
-  repo_name = "${var.infra}-${var.environment}/${local.api_name}-image"
+module "app_repo" {
+  source          = "./modules/container_registry"
+  region          = var.region
+  resource_prefix = local.resource_prefix
 
   billing_tags = local.billing_tags
 }
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # App Service
@@ -29,12 +29,11 @@ module "app_service" {
   source          = "./modules/app_runner_service"
   environment     = var.environment
   region          = var.region
-  resource_prefix = "${var.infra}-${var.environment}-${var.app_name}"
-  service_name    = local.api_name
-  container_image = "${module.app_image.repo_url}:latest"
-  container_arn   = module.app_image.repo_arn
+  resource_prefix = local.resource_prefix
+  container_image = "${module.app_repo.url}:latest"
+  container_arn   = module.app_repo.arn
 
   billing_tags = local.billing_tags
 
-  depends_on = [module.app_image]
+  depends_on = [module.app_repo]
 }

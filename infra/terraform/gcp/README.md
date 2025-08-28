@@ -26,6 +26,20 @@ gcloud config set project <YOUR-GCP-ID>
 gcloud auth application-default login
 ```
 
+## Boostrap GCP Environment
+> Run these with an authenticated account that has sufficient IAM privileges.
+
+```bash
+
+cd infra/terraform/gcp
+
+# Enable API Services
+./bootstrap/enable-gcp-services.sh <my-project-id>
+
+# Create a Terraform State Bucket
+./bootstrap/create-terraform-state-bucket.sh <my-project_id> <bucket-name> <region>
+```
+
 ## Terraform Setup and Local Deployment
 > The steps below assume the authenticated account has sufficient privileges.
 
@@ -60,19 +74,6 @@ terraform apply
 ```
 
 ## Setup CI/CD Deployment
-### Enable API Services
-
-```bash
-# Run this with an authenticated account that has sufficient IAM privileges.
-./bootstrap/enable-gcp-services.sh <my-project-id>
-```
-
-### Create a Terraform State Bucket
-```bash
-# Run these with an authenticated account that has sufficient IAM privileges.
-./bootstrap/create-terraform-state-bucket.sh <my-project_id> <bucket-name> <region>
-```
-
 ### Create a Deployer Service Account
 
 This project uses [GitHub Actions](https://github.com/features/actions) for CI/CD.
@@ -86,7 +87,6 @@ The following script creates a CI/CD service account and assigns the required ro
 
 
 ### GitHub Actions Setup
-
 Once your service account has been created, complete the following steps to integrate it with GitHub Actions:
 1. Generate Service Account Key
 ```bash

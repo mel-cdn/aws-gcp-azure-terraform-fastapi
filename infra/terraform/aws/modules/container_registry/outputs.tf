@@ -1,7 +1,7 @@
-output "repo_url" {
+output "url" {
   value = aws_ecr_repository.docker-image-repo.repository_url
 }
 
-output "repo_arn" {
+output "arn" {
   value = aws_ecr_repository.docker-image-repo.arn
 }

@@ -22,7 +22,7 @@ data "aws_caller_identity" "current" {}
 # ECR (Docker Repository)
 # ----------------------------------------------------------------------------------------------------------------------
 resource "aws_ecr_repository" "docker-image-repo" {
-  name                 = var.repo_name
+  name                 = "${var.resource_prefix}-repo"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {

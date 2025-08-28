@@ -18,7 +18,7 @@ locals {
 # Create App Runner Service
 # ----------------------------------------------------------------------------------------------------------------------
 resource "aws_apprunner_service" "service" {
-  service_name = var.service_name
+  service_name = "${var.resource_prefix}-service"
 
   source_configuration {
     image_repository {

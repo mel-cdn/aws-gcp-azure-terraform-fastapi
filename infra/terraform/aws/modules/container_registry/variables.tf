@@ -7,6 +7,6 @@ variable "region" {
   type = string
 }
 
-variable "repo_name" {
+variable "resource_prefix" {
   type = string
 }
