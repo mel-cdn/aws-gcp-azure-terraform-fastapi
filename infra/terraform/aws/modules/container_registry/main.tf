@@ -17,6 +17,15 @@ locals {
 }
 
 data "aws_caller_identity" "current" {}
+# ----------------------------------------------------------------------------------------------------------------------
+# ECR (Docker Repository Latest Image Digest)
+# ----------------------------------------------------------------------------------------------------------------------
+data "aws_ecr_image" "latest" {
+  repository_name = aws_ecr_repository.docker-image-repo.name
+  image_tag       = "latest"
+
+  depends_on = [null_resource.push-image]
+}
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ECR (Docker Repository)
@@ -73,4 +82,32 @@ resource "null_resource" "push-image" {
         EOF
   }
   depends_on = [null_resource.build-image]
+}
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Cleanup old Docker images
+# ----------------------------------------------------------------------------------------------------------------------
+resource "null_resource" "cleanup-old-images" {
+  triggers = {
+    always_run = timestamp()
+  }
+
+  provisioner "local-exec" {
+    working_dir = local.working_dir
+    command     = <<EOF
+        echo "> Cleaning up old app image..."
+        aws ecr describe-images \
+        --repository-name ${aws_ecr_repository.docker-image-repo.name} \
+        --region ${var.region} \
+        --output text \
+        --no-cli-pager \
+        | grep sha256 \
+        | awk '{print $3}' \
+        | grep -v '^$' \
+        | sed '$d' \
+        | xargs -I {} aws ecr batch-delete-image --repository-name ${aws_ecr_repository.docker-image-repo.name} --region ${var.region} --image-ids imageDigest={} \
+        | true
+        EOF
+  }
+  depends_on = [null_resource.push-image]
 }

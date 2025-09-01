@@ -4,8 +4,8 @@ variable "region" {
 }
 
 variable "infra" {
-  type        = string
-  description = "playground"
+  type    = string
+  default = "playground"
 }
 
 variable "environment" {

@@ -15,10 +15,10 @@ variable "resource_prefix" {
   type = string
 }
 
-variable "container_image" {
+variable "repo_image_latest_digest_url" {
   type = string
 }
 
-variable "container_arn" {
+variable "repo_image_arn" {
   type = string
 }

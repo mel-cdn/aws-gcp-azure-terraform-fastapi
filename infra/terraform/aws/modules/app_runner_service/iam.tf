@@ -37,7 +37,7 @@ resource "aws_iam_role_policy" "apprunner_ecr_policy" {
           "ecr:BatchGetImage",
           "ecr:GetDownloadUrlForLayer"
         ]
-        Resource = var.container_arn
+        Resource = var.repo_image_arn
       }
     ]
   })
