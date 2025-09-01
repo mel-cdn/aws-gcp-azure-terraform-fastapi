@@ -40,4 +40,4 @@ for ROLE in "${ROLES[@]}"; do
     --role="$ROLE"
 done
 
-echo "> Service account $SA_EMAIL created and roles assigned!"
+echo "> Service account $SA_EMAIL created and roles assigned."

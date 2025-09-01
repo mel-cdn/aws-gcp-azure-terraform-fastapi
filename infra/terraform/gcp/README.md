@@ -1,4 +1,4 @@
-# Terraform Deployment
+# Terraform Deployment (GCP)
 
 ## Getting Started
 
@@ -27,7 +27,7 @@ gcloud auth application-default login
 ```
 
 ## Boostrap GCP Environment
-> Run these with an authenticated account that has sufficient IAM privileges.
+> The steps below assume the authenticated account has sufficient privileges.
 
 ```bash
 
@@ -53,12 +53,11 @@ cd infra/terraform/gcp
     > You may also use [.tfvars](https://developer.hashicorp.com/terraform/language/values/variables#assigning-values-to-root-module-variables).
 3. Run the following commands to initialize and deploy:
 ```bash
+# Initialize Terraform with your remote backend
+terraform init --backend-config="bucket=<your-gcs-bucket-for-tf-state>"
 
 # Select or create a Terraform workspace (this will act as the ENVIRONMENT)
 terraform workspace select -or-create dev
-
-# Initialize Terraform with your remote backend
-terraform init --backend-config="<your-gcs-bucket-for-tf-state>"
 
 # Format Terraform configuration files
 terraform fmt
@@ -85,7 +84,6 @@ The following script creates a CI/CD service account and assigns the required ro
 ./bootstrap/create-deployer-sa.sh <my-project-id>
 ```
 
-
 ### GitHub Actions Setup
 Once your service account has been created, complete the following steps to integrate it with GitHub Actions:
 1. Generate Service Account Key
@@ -96,13 +94,12 @@ gcloud iam service-accounts keys create key.json \
   --project=$PROJECT_ID
 ```
 2. Add Key to GitHub Secrets
-
-- Go to your repository → Settings → Secrets and variables → Actions → New repository secret
-- Add the following:
-  - `GCP_PREFIX` → your project ID prefix
-  - `GCP_SA_KEY` → contents of the `key.json` file (copy and paste)
+   - Go to your repository → Settings → Secrets and variables → Actions → New repository secret
+   - Add the following:
+     - `GCP_PREFIX` → your project ID prefix
+     - `GCP_SA_KEY` → contents of the `key.json` file (copy and paste)
 3. Update GitHub Actions Workflow
    - Ensure the workflow [gcp_deploy template](../../../.github/workflows/gcp_deploy.yml) references the secrets.
 4. Trigger Deployment
-- Push changes to the default branch (e.g., develop or main)
-- GitHub Actions will automatically run the Terraform deployment workflow.
+   - Push changes to the default branch (e.g., develop or main)
+   - GitHub Actions will automatically run the Terraform deployment workflow.
