@@ -15,7 +15,7 @@ jobs:
     env:
       ENVIRONMENT: ${{ inputs.environment }}
       GOOGLE_PROJECT_PREFIX: ${{ secrets.GCP_PREFIX }}
-      TF_BACKEND_GCS_BUCKET: ${{ secrets.GCP_TERRAFORM_BACKEND_BUCKET_PREFIX }}-${{ needs.setup_environment.outputs.target_environment }}
+      TF_BACKEND_GCS_BUCKET: ${{ secrets.GCP_TERRAFORM_BACKEND_BUCKET_PREFIX }}-${{ inputs.environment }}
 
     steps:
       - name: Checkout code
