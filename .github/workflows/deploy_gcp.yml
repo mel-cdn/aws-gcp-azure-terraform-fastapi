@@ -16,6 +16,8 @@ jobs:
       ENVIRONMENT: ${{ inputs.environment }}
       GOOGLE_PROJECT_PREFIX: ${{ secrets.GCP_PREFIX }}
       TF_BACKEND_GCS_BUCKET: ${{ secrets.GCP_TERRAFORM_BACKEND_BUCKET_PREFIX }}-${{ inputs.environment }}
+      REGION: ${{ secrets.GCP_REGION }}
+      APP_NAME: ${{ vars.APP_NAME }}
 
     steps:
       - name: Checkout code
@@ -45,12 +47,18 @@ jobs:
         working-directory: ./infra/terraform/gcp
         run: |
           terraform init \
-            --backend-config="bucket=${TF_BACKEND_GCS_BUCKET}"
+            --backend-config="bucket=${TF_BACKEND_GCS_BUCKET}" \
+            --backend-config=prefix=${APP_NAME}
 
       - name: Terraform Plan
         working-directory: ./infra/terraform/gcp
         run: |
-          terraform plan -var="project_prefix=${GOOGLE_PROJECT_PREFIX}" -var="environment=${ENVIRONMENT}" -out=tfplan
+          terraform plan \
+            -var="project_prefix=${GOOGLE_PROJECT_PREFIX}" \
+            -var="region=${REGION}" \
+            -var="environment=${ENVIRONMENT}" \
+            -var="app_name=${APP_NAME}" \
+            -out=tfplan
 
       - name: Terraform Apply
         working-directory: ./infra/terraform/gcp

@@ -117,7 +117,7 @@ gcloud iam service-accounts keys create key.json --iam-account=<service-account-
     - Add the following variables:
         - `APP_NAME` = `dm-inventory`
 4. Update GitHub Actions Workflow
-    - Ensure your workflow [aws_deploy template](../../../.github/workflows/deploy_aws.yml) references these secrets.
+    - Ensure your workflow [deploy_gcp template](../../../.github/workflows/deploy_aws.yml) references these secrets.
 5. Trigger Deployment
     - Push changes to your target branch (e.g., `develop` or `main`).
     - GitHub Actions will automatically run the Terraform deployment workflow.

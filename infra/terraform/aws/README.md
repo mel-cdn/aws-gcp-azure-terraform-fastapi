@@ -121,7 +121,7 @@ aws iam create-access-key --user-name <service-account-name>
         - `AWS_INFRA` = `playground`
         - `APP_NAME` = `dm-inventory`
 4. Update GitHub Actions Workflow
-    - Ensure your workflow [aws_deploy template](../../../.github/workflows/deploy_aws.yml) references these secrets.
+    - Ensure your workflow [deploy_aws template](../../../.github/workflows/deploy_aws.yml) references these secrets.
 5. Trigger Deployment
     - Push changes to your target branch (e.g., `develop` or `main`).
     - GitHub Actions will automatically run the Terraform deployment workflow.

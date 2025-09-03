@@ -16,7 +16,7 @@ jobs:
       ENVIRONMENT: ${{ inputs.environment }}
       TF_BACKEND_S3_BUCKET: ${{ secrets.AWS_TERRAFORM_BACKEND_BUCKET }}
       TF_BACKEND_DYNAMODB_TABLE: ${{ secrets.AWS_TERRAFORM_BACKEND_DYNAMODB_TABLE }}
-      AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+      REGION: ${{ secrets.AWS_REGION }}
       INFRA: ${{ vars.AWS_INFRA }}
       APP_NAME: ${{ vars.APP_NAME }}
 
@@ -50,7 +50,7 @@ jobs:
           terraform init \
             -backend-config="bucket=${TF_BACKEND_S3_BUCKET}" \
             -backend-config="dynamodb_table=${TF_BACKEND_DYNAMODB_TABLE}" \
-            -backend-config="region=${AWS_DEFAULT_REGION}" \
+            -backend-config="region=${REGION}" \
             -backend-config=workspace_key_prefix=${APP_NAME}
 
           terraform workspace select -or-create "${ENVIRONMENT}"
@@ -59,7 +59,7 @@ jobs:
         working-directory: ./infra/terraform/aws
         run: |
           terraform plan \
-            -var="region=${AWS_DEFAULT_REGION}" \
+            -var="region=${REGION}" \
             -var="infra=${INFRA}" \
             -var="environment=${ENVIRONMENT}" \
             -var="app_name=${APP_NAME}" \
