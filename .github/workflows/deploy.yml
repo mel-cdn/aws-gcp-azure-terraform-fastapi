@@ -55,11 +55,11 @@ jobs:
     uses: ./.github/workflows/deploy_aws.yml
     secrets: inherit
     with:
-      environment: ${{ needs.setup_environment.outputs.environment }}
+      environment: ${{ needs.setup_environment.outputs.target_environment }}
 
   deploy_gcp:
     needs: [ setup_environment, lint_and_unit_tests ]
     uses: ./.github/workflows/deploy_gcp.yml
     secrets: inherit
     with:
-      environment: ${{ needs.setup_environment.outputs.environment }}
+      environment: ${{ needs.setup_environment.outputs.target_environment }}
