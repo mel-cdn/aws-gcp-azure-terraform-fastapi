@@ -112,7 +112,6 @@ aws iam create-access-key --user-name <service-account-name>
 3. Add Repository Secrets (common across all environments)
     - Navigate to your repository: → Settings → Secrets and variables → Actions → Secrets → New repository secret
     - Add the following secrets:
-        - `AWS_ACCOUNT_ID`
         - `AWS_REGION`
         - `AWS_TERRAFORM_BACKEND_BUCKET`
         - `AWS_TERRAFORM_LOCK_TABLE`

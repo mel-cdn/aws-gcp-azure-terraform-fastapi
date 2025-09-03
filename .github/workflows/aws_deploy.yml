@@ -1,0 +1,102 @@
+name: Deploy FastAPI Service to AWS
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+
+jobs:
+  setup_environment:
+    name: Setup Environment
+    runs-on: ubuntu-latest
+    outputs:
+      target_environment: ${{ steps.set.outputs.environment }}
+    steps:
+      - name: Determine Environment
+        id: set
+        run: |
+          if [ "${GITHUB_REF_NAME}" = "main" ]; then
+            echo "environment=prod" >> $GITHUB_OUTPUT
+          else
+            echo "environment=dev" >> $GITHUB_OUTPUT
+          fi
+
+  lint_and_unit_tests:
+    name: Pre-commit Lint and Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv==2025.0.4
+          pipenv requirements --categories default,dev-packages > requirements.txt
+          pip install -r requirements.txt
+
+      - name: Run Pre-commit
+        run: |
+          pre-commit run --all-files
+
+      - name: Run Pytest
+        run: |
+          ./run-unit-tests-with-coverage.sh
+
+  terraform_deployment:
+    needs:
+      - setup_environment
+      - lint_and_unit_tests
+    runs-on: ubuntu-latest
+    environment: ${{ needs.setup_environment.outputs.target_environment }}
+    env:
+      ENVIRONMENT: ${{ needs.setup_environment.outputs.target_environment }}
+      TF_BACKEND_S3_BUCKET: ${{ secrets.AWS_TERRAFORM_BACKEND_BUCKET }}
+      TF_BACKEND_DYNAMODB_TABLE: ${{ secrets.AWS_TERRAFORM_BACKEND_DYNAMODB_TABLE }}
+      AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+      INFRA: ${{ vars.INFRA }}
+      APP_NAME: ${{ vars.APP_NAME }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.5
+
+      - name: Terraform Init
+        working-directory: ./infra/terraform/aws
+        run: |
+          terraform init \
+            -backend-config="bucket=${TF_BACKEND_S3_BUCKET}" \
+            -backend-config="dynamodb_table=${TF_BACKEND_DYNAMODB_TABLE}" \
+            -backend-config="region=${AWS_DEFAULT_REGION}" \
+            -backend-config=workspace_key_prefix=${APP_NAME}
+
+      - name: Terraform Plan
+        working-directory: ./infra/terraform/aws
+        run: |
+          terraform plan \
+            -var="region=${AWS_DEFAULT_REGION}" \
+            -var="infra=${INFRA}" \
+            -var="environment=${ENVIRONMENT}" \
+            -var="app_name=${APP_NAME}" \
+            -out=tfplan
+
+      - name: Terraform Apply
+        working-directory: ./infra/terraform/aws
+        run: terraform apply -auto-approve tfplan
