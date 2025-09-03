@@ -1,4 +1,4 @@
-# Terraform Deployment (GCP)
+# GCP Terraform Deployment
 
 ## Getting Started
 
@@ -15,7 +15,6 @@ Before proceeding, ensure the following are installed and configured:
 ### Authenticate Google Cloud Credentials
 
 ```bash
-
 # Authenticate your GCP account
 gcloud init
 
@@ -30,14 +29,13 @@ gcloud auth application-default login
 > The steps below assume the authenticated account has sufficient privileges.
 
 ```bash
-
 cd infra/terraform/gcp
 
 # Enable API Services
 ./bootstrap/enable-gcp-services.sh <my-project-id>
 
 # Create a Terraform State Bucket
-./bootstrap/create-terraform-state-bucket.sh <my-project_id> <bucket-name> <region>
+./bootstrap/create-terraform-state-bucket.sh <my-project-id> <bucket-name> <region>
 ```
 
 ## Terraform Setup and Local Deployment
@@ -54,10 +52,11 @@ cd infra/terraform/gcp
 3. Run the following commands to initialize and deploy:
 ```bash
 # Initialize Terraform with your remote backend
+# Refer to ## Boostrap GCP Environment
 terraform init --backend-config="bucket=<your-gcs-bucket-for-tf-state>"
 
-# Select or create a Terraform workspace (this will act as the ENVIRONMENT)
-terraform workspace select -or-create dev
+# Select or create a Terraform workspace (this will act as the ENVIRONMENT e.g. dev)
+terraform workspace select -or-create <environment>>
 
 # Format Terraform configuration files
 terraform fmt

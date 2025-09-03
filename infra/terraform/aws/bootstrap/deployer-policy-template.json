@@ -1,0 +1,47 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "BuildECRAuthentication",
+      "Effect": "Allow",
+      "Action": "ecr:GetAuthorizationToken",
+      "Resource": "*"
+    },
+    {
+      "Sid": "BuildIAMRoles",
+      "Effect": "Allow",
+      "Action": "iam:*",
+      "Resource": "arn:aws:iam::{{ACCOUNT_ID}}:role/playground-dm-inventory-{{ENVIRONMENT}}-*"
+    },
+    {
+      "Sid": "BuildECRAccess",
+      "Effect": "Allow",
+      "Action": "ecr:*",
+      "Resource": "arn:aws:ecr:*:{{ACCOUNT_ID}}:repository/playground-dm-inventory-{{ENVIRONMENT}}-*"
+    },
+    {
+      "Sid": "BuildAppRunnerAccess",
+      "Effect": "Allow",
+      "Action": "apprunner:*",
+      "Resource": [
+        "arn:aws:apprunner:*:{{ACCOUNT_ID}}:service/playground-dm-inventory-{{ENVIRONMENT}}-*",
+        "arn:aws:apprunner:*:{{ACCOUNT_ID}}:autoscalingconfiguration/*"
+      ]
+    },
+    {
+      "Sid": "TerraformStateS3Bucket",
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::{{S3_TERRAFORM_STATE_BUCKET}}",
+        "arn:aws:s3:::{{S3_TERRAFORM_STATE_BUCKET}}/*"
+      ]
+    },
+    {
+      "Sid": "TerraformStateLocksDynamoDB",
+      "Effect": "Allow",
+      "Action": "dynamodb:*",
+      "Resource": "arn:aws:dynamodb:*:325245655684:table/{{DYNAMODB_TERRAFORM_LOCKS_TABLE}}"
+    }
+  ]
+}

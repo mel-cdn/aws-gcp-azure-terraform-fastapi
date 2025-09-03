@@ -17,6 +17,7 @@ locals {
 }
 
 data "aws_caller_identity" "current" {}
+
 # ----------------------------------------------------------------------------------------------------------------------
 # ECR (Docker Repository Latest Image Digest)
 # ----------------------------------------------------------------------------------------------------------------------
@@ -95,7 +96,7 @@ resource "null_resource" "cleanup-old-images" {
   provisioner "local-exec" {
     working_dir = local.working_dir
     command     = <<EOF
-        echo "> Cleaning up old app image..."
+        echo "> Cleaning up old app image (keep latest only)..."
         aws ecr describe-images \
         --repository-name ${aws_ecr_repository.docker-image-repo.name} \
         --region ${var.region} \

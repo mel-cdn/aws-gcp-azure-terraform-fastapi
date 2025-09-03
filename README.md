@@ -98,7 +98,7 @@ pipenv shell
 
 ### Infrastructure (AWS)
 
-- [ ] Terraform deployment with S3 backend
+- [X] Terraform deployment with S3 backend
 - [ ] Setup GitHub Actions pipeline
 - [ ] Automated deployment to `prod` environment
 - [ ] Link service to a domain name

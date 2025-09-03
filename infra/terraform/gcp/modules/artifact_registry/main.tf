@@ -123,7 +123,7 @@ resource "null_resource" "cleanup-old-images" {
   provisioner "local-exec" {
     working_dir = local.working_dir
     command     = <<EOF
-        echo "> Cleaning up old app image..."
+        echo "> Cleaning up old app image (keep latest only)..."
         gcloud artifacts docker images list "${local.image_tag}" \
         --include-tags \
         --filter="tags!=latest" \
