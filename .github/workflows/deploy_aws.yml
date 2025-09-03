@@ -11,9 +11,9 @@ jobs:
   terraform_deployment:
     name: AWS Terraform Deployment
     runs-on: ubuntu-latest
-    environment: ${{ needs.setup_environment.outputs.target_environment }}
+    environment: ${{ inputs.environment }}
     env:
-      ENVIRONMENT: ${{ needs.setup_environment.outputs.target_environment }}
+      ENVIRONMENT: ${{ inputs.environment }}
       TF_BACKEND_S3_BUCKET: ${{ secrets.AWS_TERRAFORM_BACKEND_BUCKET }}
       TF_BACKEND_DYNAMODB_TABLE: ${{ secrets.AWS_TERRAFORM_BACKEND_DYNAMODB_TABLE }}
       AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
