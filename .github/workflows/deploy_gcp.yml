@@ -1,60 +1,15 @@
-name: Deploy FastAPI Service to GCP
+name: Deploy to GCP
 
 on:
-  push:
-    branches:
-      - develop
-      - main
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
 
 jobs:
-  setup_environment:
-    name: Setup Environment
-    runs-on: ubuntu-latest
-    outputs:
-      target_environment: ${{ steps.set.outputs.environment }}
-    steps:
-      - name: Determine Environment
-        id: set
-        run: |
-          if [ "${GITHUB_REF_NAME}" = "main" ]; then
-            echo "environment=prod" >> $GITHUB_OUTPUT
-          else
-            echo "environment=dev" >> $GITHUB_OUTPUT
-          fi
-
-  lint_and_unit_tests:
-    name: Pre-commit Lint and Unit Tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pipenv==2025.0.4
-          pipenv requirements --categories default,dev-packages > requirements.txt
-          pip install -r requirements.txt
-
-      - name: Run Pre-commit
-        run: |
-          pre-commit run --all-files
-
-      - name: Run Pytest
-        run: |
-          ./run-unit-tests-with-coverage.sh
-
   terraform_deployment:
-    name: Terraform Deployment
-    needs:
-      - setup_environment
-      - lint_and_unit_tests
+    name: GCP Terraform Deployment
     environment: ${{ needs.setup_environment.outputs.target_environment }}
     runs-on: ubuntu-latest
     env:

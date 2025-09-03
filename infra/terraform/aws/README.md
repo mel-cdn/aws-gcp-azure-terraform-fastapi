@@ -82,7 +82,7 @@ terraform apply
 ### Create a Deployer Service Account
 
 This project uses [GitHub Actions](https://github.com/features/actions) for CI/CD.
-Refer to the [deployment workflow template](../../../.github/workflows/aws_deploy.yml) for integration.
+Refer to the [deployment workflow template](../../../.github/workflows/deploy_aws.yml) for integration.
 
 The following script creates a CI/CD service account and assigns the required roles.
 
@@ -121,7 +121,7 @@ aws iam create-access-key --user-name <service-account-name>
         - `AWS_INFRA` = `playground`
         - `APP_NAME` = `dm-inventory`
 4. Update GitHub Actions Workflow
-    - Ensure your workflow [aws_deploy template](../../../.github/workflows/aws_deploy.yml) references these secrets.
+    - Ensure your workflow [aws_deploy template](../../../.github/workflows/deploy_aws.yml) references these secrets.
 5. Trigger Deployment
-    - ush changes to your target branch (e.g., `develop` or `main`).
+    - Push changes to your target branch (e.g., `develop` or `main`).
     - GitHub Actions will automatically run the Terraform deployment workflow.
