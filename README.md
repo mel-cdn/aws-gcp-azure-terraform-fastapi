@@ -2,26 +2,25 @@
 
 [![PROD Build Status](https://github.com/mel-cdn/dm-inventory-service/actions/workflows/gcp_deploy.yml/badge.svg?branch=main)](https://github.com/mel-cdn/dm-inventory-service/actions/workflows/gcp_deploy.yml)
 
-## Overview
+## 📖 Overview
 
 This repository is a sandbox project for experimenting with **Domain-Driven Design (DDD)** principles using a **FastAPI
-** application.  
-It simulates managing paper product inventory, sales personnel, and sales transactions — inspired by *Dunder Mifflin*.
+** application across multiple cloud platforms.
 
-## Highlights
+## ✨ Highlights
 
 - Domain-Driven Design architecture with FastAPI
 - Containerized with Docker
 - Deployment targets:
-  - Google Cloud Platform (GCP)
-  - Amazon Web Services (AWS)
-  - Microsoft Azure (Azure)
+    - Google Cloud Platform (GCP)
+    - Amazon Web Services (AWS)
+    - Microsoft Azure (Azure)
 - Infrastructure as Code via Terraform
-- Automated CI/CD using GitHub Actions with Terraform Validation and Deployment
+- Automated CI/CD using GitHub Actions (Terraform validation + deployment)
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -73,7 +72,7 @@ pipenv shell
 ./run-unit-tests-with-coverage.sh
 ```
 
-## API Deployments
+## 🌍 API Deployments
 
 ### Infrastructure as Code (IaC)
 
@@ -85,7 +84,7 @@ pipenv shell
 - AWS - [not yet available](https://www.powerthesaurus.org/not_yet_available)
 - GCP - [Swagger Docs](https://dm-inventory-api-6jqimisapa-de.a.run.app/swagger)
 
-## Roadmap / To-Do
+## 🗺️ Roadmap / To-Do
 
 ### Service
 
