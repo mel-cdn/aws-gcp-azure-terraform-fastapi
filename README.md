@@ -76,8 +76,8 @@ pipenv shell
 
 ### FastAPI Endpoints
 
-- DEV: AWS Hosted -> [not yet available](https://www.powerthesaurus.org/not_yet_available)
-- DEV: GCP Hosted -> [Swagger Docs](https://dm-inventory-api-ssivswgqkq-de.a.run.app/swagger)
+- AWS - [not yet available](https://www.powerthesaurus.org/not_yet_available)
+- GCP - [Swagger Docs](https://dm-inventory-api-ssivswgqkq-de.a.run.app/swagger)
 
 ## Roadmap / To-Do
 
@@ -92,15 +92,15 @@ pipenv shell
 ### Infrastructure (GCP)
 
 - [X] Terraform deployment with GCS backend
-- [X] Setup GitHub Actions pipeline
+- [X] Setup GitHub Actions deployment pipeline
 - [X] Automated deployment to `prod` environment
 - [ ] Update GitHub Pipeline to use OIDC instead of Service Account Key
-- [ ] Link service to a domain name
+- [ ] Map service to a domain name
 
 ### Infrastructure (AWS)
 
 - [X] Terraform deployment with S3 backend
-- [ ] Setup GitHub Actions pipeline
+- [X] Setup GitHub Actions deployment pipeline
 - [ ] Automated deployment to `prod` environment
 - [ ] Update GitHub Pipeline to use OIDC instead AWS Keys
-- [ ] Link service to a domain name
+- [ ] Map service to a domain name
