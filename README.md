@@ -9,14 +9,18 @@ This repository is a sandbox project for experimenting with **Domain-Driven Desi
 
 ## ✨ Highlights
 
-- Domain-Driven Design architecture with FastAPI
-- Containerized with Docker
-- Deployment targets:
-    - Google Cloud Platform (GCP)
-    - Amazon Web Services (AWS)
-    - Microsoft Azure (Azure)
-- Infrastructure as Code via Terraform
-- Automated CI/CD using GitHub Actions (Terraform validation + deployment)
+- ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white) Domain-Driven Design architecture
+  with FastAPI
+- ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white) Containerization with Docker
+- ☁️ Multi-cloud deployment targets:
+    - ![GCP](https://img.shields.io/badge/Google%20Cloud-4285F4?logo=googlecloud&logoColor=white) Google Cloud
+      Platform (GCP)
+    - ![AWS](https://img.shields.io/badge/AWS-FF9900?logo=amazon-aws&logoColor=white) Amazon Web Services (AWS)
+    - ![Azure](https://img.shields.io/badge/Azure-0078D4?logo=microsoft-azure&logoColor=white) Microsoft Azure (Azure)
+- ![Terraform](https://img.shields.io/badge/Terraform-7B42BC?logo=terraform&logoColor=white) Infrastructure as Code via
+  Terraform
+- ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=githubactions&logoColor=white) Automated
+  CI/CD using GitHub Actions (Terraform validation + deployment)
 
 ---
 
@@ -81,7 +85,7 @@ pipenv shell
 
 ### FastAPI Endpoints
 
-- AWS - [not yet available](https://www.powerthesaurus.org/not_yet_available)
+- AWS - [Swagger Docs](https://xzmd8mftmp.ap-southeast-1.awsapprunner.com/swagger)
 - GCP - [Swagger Docs](https://dm-inventory-api-6jqimisapa-de.a.run.app/swagger)
 
 ## 🗺️ Roadmap / To-Do
