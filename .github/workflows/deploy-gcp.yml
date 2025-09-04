@@ -8,8 +8,15 @@ on:
         type: string
 
 jobs:
+  terraform_validate:
+    name: GCP Terraform Validation
+    uses: ./.github/workflows/terraform-validate.yml
+    with:
+      path: ./infra/terraform/gcp
+
   terraform_deployment:
     name: GCP Terraform Deployment
+    needs: [ terraform_validate ]
     environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     env:

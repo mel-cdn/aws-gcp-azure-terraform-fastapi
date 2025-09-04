@@ -8,8 +8,15 @@ on:
         type: string
 
 jobs:
+  terraform_validate:
+    name: AWS Terraform Validation
+    uses: ./.github/workflows/terraform-validate.yml
+    with:
+      path: ./infra/terraform/aws
+
   terraform_deployment:
     name: AWS Terraform Deployment
+    needs: [ terraform_validate ]
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     env:

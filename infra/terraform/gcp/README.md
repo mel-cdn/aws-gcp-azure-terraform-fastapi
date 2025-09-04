@@ -82,7 +82,7 @@ terraform apply
 ### Create a Deployer Service Account
 
 This project uses [GitHub Actions](https://github.com/features/actions) for CI/CD.
-Refer to the [deployment workflow template](../../../.github/workflows/deploy_gcp.yml) for integration.
+Refer to the [deployment workflow template](../../../.github/workflows/deploy-gcp.yml) for integration.
 
 The following script creates a CI/CD service account and assigns the required roles.
 
@@ -117,7 +117,7 @@ gcloud iam service-accounts keys create key.json --iam-account=<service-account-
       - `APP_NAME` = `dm-inventory`
       - `GCP_REGION` = `asia-east1`
 4. Update GitHub Actions Workflow
-    - Ensure your workflow [deploy_gcp template](../../../.github/workflows/deploy_aws.yml) references these secrets.
+    - Ensure your workflow [deploy-gcp template](../../../.github/workflows/deploy-aws.yml) references these secrets.
 5. Trigger Deployment
     - Push changes to your target branch (e.g., `develop` or `main`).
     - GitHub Actions will automatically run the Terraform deployment workflow.

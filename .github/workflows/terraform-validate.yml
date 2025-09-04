@@ -1,0 +1,43 @@
+name: Terraform Validate
+
+on:
+  workflow_call:
+    inputs:
+      path:
+        description: "Path to the Terraform configuration directory"
+        required: true
+        type: string
+
+jobs:
+  validate:
+    name: Validate Terraform (${{ inputs.path }})
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.5
+
+      - name: Terraform Init (no backend)
+        working-directory: ${{ inputs.path }}
+        run: terraform init -backend=false
+
+      - name: Terraform Format Check
+        working-directory: ${{ inputs.path }}
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Validate
+        working-directory: ${{ inputs.path }}
+        run: terraform validate
+
+      - name: Install tflint
+        run: |
+          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+          tflint --version
+
+      - name: Run tflint
+        working-directory: ${{ inputs.path }}
+        run: tflint --recursive
