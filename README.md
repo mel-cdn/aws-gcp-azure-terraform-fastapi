@@ -85,8 +85,8 @@ pipenv shell
 
 ### FastAPI Endpoints
 
-- AWS - [Swagger Docs](https://xzmd8mftmp.ap-southeast-1.awsapprunner.com/swagger)
-- GCP - [Swagger Docs](https://dm-inventory-api-6jqimisapa-de.a.run.app/swagger)
+- AWS Swagger Docs - https://xzmd8mftmp.ap-southeast-1.awsapprunner.com/swagger
+- GCP Swagger Docs - https://dm-inventory-api-6jqimisapa-de.a.run.app/swagger
 
 ## 🗺️ Roadmap / To-Do
 
