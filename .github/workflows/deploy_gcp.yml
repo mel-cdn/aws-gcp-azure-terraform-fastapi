@@ -16,7 +16,7 @@ jobs:
       ENVIRONMENT: ${{ inputs.environment }}
       GOOGLE_PROJECT_PREFIX: ${{ secrets.GCP_PREFIX }}
       TF_BACKEND_GCS_BUCKET: ${{ secrets.GCP_TERRAFORM_BACKEND_BUCKET_PREFIX }}-${{ inputs.environment }}
-      REGION: ${{ secrets.GCP_REGION }}
+      REGION: ${{ vars.GCP_REGION }}
       APP_NAME: ${{ vars.APP_NAME }}
 
     steps:

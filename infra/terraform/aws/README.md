@@ -112,14 +112,14 @@ aws iam create-access-key --user-name <service-account-name>
 3. Add Repository Secrets (common across all environments)
     - Navigate to your repository: → Settings → Secrets and variables → Actions → Secrets → New repository secret
     - Add the following secrets:
-        - `AWS_REGION`
         - `AWS_TERRAFORM_BACKEND_BUCKET`
         - `AWS_TERRAFORM_LOCK_TABLE`
 3. Add Repository Variables (common across all environments)
     - Navigate to your repository: → Settings → Secrets and variables → Actions → Variables → New repository variable
     - Add the following variables:
-        - `AWS_INFRA` = `playground`
         - `APP_NAME` = `dm-inventory`
+        - `AWS_INFRA` = `playground`
+        - `AWS_REGION` = `ap-southeast-1`
 4. Update GitHub Actions Workflow
     - Ensure your workflow [deploy_aws template](../../../.github/workflows/deploy_aws.yml) references these secrets.
 5. Trigger Deployment
