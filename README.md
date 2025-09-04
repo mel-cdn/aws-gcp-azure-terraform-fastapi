@@ -1,6 +1,6 @@
 # Dunder Mifflin Inventory Service
 
-[![PROD Build Status](https://github.com/mel-cdn/dm-inventory-service/actions/workflows/gcp_deploy.yml/badge.svg?branch=main)](https://github.com/mel-cdn/dm-inventory-service/actions/workflows/gcp_deploy.yml)
+[![PROD Build Status](https://github.com/mel-cdn/dm-inventory-service/actions/workflows/gcp_deploy.yml/badge.svg?branch=main)](https://github.com/mel-cdn/dm-inventory-service/actions/workflows/deploy.yml)
 
 ## 📖 Overview
 
@@ -12,7 +12,7 @@ This repository is a sandbox project for experimenting with **Domain-Driven Desi
 - ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white) Domain-Driven Design architecture
   with FastAPI
 - ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white) Containerization with Docker
-- ☁️ Multi-cloud deployment targets:
+- ☁️ **Multi-cloud deployment targets** ☁️
     - ![GCP](https://img.shields.io/badge/Google%20Cloud-4285F4?logo=googlecloud&logoColor=white) Google Cloud
       Platform (GCP)
     - ![AWS](https://img.shields.io/badge/AWS-FF9900?logo=amazon-aws&logoColor=white) Amazon Web Services (AWS)
