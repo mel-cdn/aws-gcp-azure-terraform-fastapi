@@ -1,6 +1,6 @@
 # Dunder Mifflin Inventory Service
 
-[![PROD Build Status](https://github.com/mel-cdn/dm-inventory-service/actions/workflows/gcp_deploy.yml/badge.svg?branch=main)](https://github.com/mel-cdn/dm-inventory-service/actions/workflows/deploy.yml)
+[![PROD Build Status](https://github.com/mel-cdn/dm-inventory-service/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/mel-cdn/dm-inventory-service/actions/workflows/deploy.yml)
 
 ## 📖 Overview
 
