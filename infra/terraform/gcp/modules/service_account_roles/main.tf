@@ -5,7 +5,7 @@ terraform {
       version = "6.8.0"
     }
   }
-  required_version = "= 1.12.2"
+  required_version = ">= 1.2.0"
 }
 
 resource "google_project_iam_member" "sa_roles" {
