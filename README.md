@@ -12,9 +12,12 @@ It simulates managing paper product inventory, sales personnel, and sales transa
 
 - Domain-Driven Design architecture with FastAPI
 - Containerized with Docker
-- Deployment targets: Google Cloud Platform (GCP) and Amazon Web Services (AWS)
-- Infrastructure as Code via Terraform (for both GCP and AWS)
-- Automated CI/CD using GitHub Actions
+- Deployment targets:
+  - Google Cloud Platform (GCP)
+  - Amazon Web Services (AWS)
+  - Microsoft Azure (Azure)
+- Infrastructure as Code via Terraform
+- Automated CI/CD using GitHub Actions with Terraform Validation and Deployment
 
 ---
 
@@ -28,10 +31,13 @@ Ensure the following tools are installed:
     - [Python 3.12+](https://www.python.org/)
 - **Google Cloud Platform (GCP)**
     - [Google Cloud Account](https://console.cloud.google.com/)
-    - [gcloud CLI](https://cloud.google.com/sdk/docs/install)
+    - [cloud CLI](https://cloud.google.com/sdk/docs/install/)
 - **Amazon Web Services (AWS)**
     - [AWS Account](https://aws.amazon.com/)
     - [AWS CLI](https://aws.amazon.com/cli/)
+- **Microsft Azure (Azure)**
+    - [Azure Account](https://azure.microsoft.com/)
+    - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest)
 - **Docker**
     - [Docker Desktop or CLI](https://docs.docker.com/desktop/)
 - **Terraform**
@@ -103,4 +109,11 @@ pipenv shell
 - [X] Setup GitHub Actions deployment pipeline
 - [ ] Automated deployment to `prod` environment
 - [ ] Update GitHub Pipeline to use OIDC instead AWS Keys
+- [ ] Map service to a domain name
+
+### Infrastructure (Azure)
+
+- [ ] Terraform deployment with backend
+- [ ] Setup GitHub Actions deployment pipeline
+- [ ] Automated deployment to `prod` environment
 - [ ] Map service to a domain name

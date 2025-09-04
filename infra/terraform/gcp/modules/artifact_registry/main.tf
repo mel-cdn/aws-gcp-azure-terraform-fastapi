@@ -30,7 +30,7 @@ locals {
 # ----------------------------------------------------------------------------------------------------------------------
 # Enable Artifact Registry API
 # ----------------------------------------------------------------------------------------------------------------------
-resource "google_project_service" "artifact-registry-apa" {
+resource "google_project_service" "artifact-registry-api" {
   project            = var.project_id
   service            = "artifactregistry.googleapis.com"
   disable_on_destroy = false
