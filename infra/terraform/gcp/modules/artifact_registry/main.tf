@@ -4,13 +4,13 @@ terraform {
       source  = "hashicorp/google"
       version = "6.8.0"
     }
-       null = {
+    null = {
       source  = "hashicorp/null"
       version = "~> 3.2"
     }
-       local = {
-      source  = "hashicorp/null"
-      version =  "~> 2.5"
+    local = {
+      source  = "hashicorp/local"
+      version = "~> 2.5"
     }
   }
   required_version = ">= 1.2.0"
@@ -30,7 +30,7 @@ locals {
 # ----------------------------------------------------------------------------------------------------------------------
 # Enable Artifact Registry API
 # ----------------------------------------------------------------------------------------------------------------------
-resource "google_project_service" "artifact-registry-api" {
+resource "google_project_service" "artifact-registry-apa" {
   project            = var.project_id
   service            = "artifactregistry.googleapis.com"
   disable_on_destroy = false

@@ -77,7 +77,7 @@ pipenv shell
 ### FastAPI Endpoints
 
 - AWS - [not yet available](https://www.powerthesaurus.org/not_yet_available)
-- GCP - [Swagger Docs](https://dm-inventory-api-ssivswgqkq-de.a.run.app/swagger)
+- GCP - [Swagger Docs](https://dm-inventory-api-6jqimisapa-de.a.run.app/swagger)
 
 ## Roadmap / To-Do
 

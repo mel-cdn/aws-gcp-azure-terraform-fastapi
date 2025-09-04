@@ -27,7 +27,7 @@ module "app_repo" {
 # ----------------------------------------------------------------------------------------------------------------------
 module "app_service" {
   source                       = "./modules/app_runner_service"
-  environment                     = var.environment
+  environment                  = var.environment
   region                       = var.region
   resource_prefix              = local.resource_prefix
   repo_image_latest_digest_url = "${module.app_repo.url}:latest@${module.app_repo.latest_image_digest}"
