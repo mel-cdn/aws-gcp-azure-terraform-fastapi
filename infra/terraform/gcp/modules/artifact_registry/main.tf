@@ -4,6 +4,14 @@ terraform {
       source  = "hashicorp/google"
       version = "6.8.0"
     }
+       null = {
+      source  = "hashicorp/null"
+      version = "~> 3.2"
+    }
+       local = {
+      source  = "hashicorp/null"
+      version =  "~> 2.5"
+    }
   }
   required_version = ">= 1.2.0"
 }

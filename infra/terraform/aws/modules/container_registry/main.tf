@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "6.8.0"
     }
+    null = {
+      source  = "hashicorp/null"
+      version = "~> 3.2"
+    }
   }
   required_version = ">= 1.2.0"
 }
@@ -12,7 +16,7 @@ locals {
   normalized_billing_tags = {
     for k, v in var.billing_tags : lower(k) => lower(v)
   }
-  working_dir      = "${path.root}/../../../" # 3 levels up to the root where Docker requirements resides
+  working_dir = "${path.root}/../../../" # 3 levels up to the root where Docker requirements resides
   image_tag_prefix = aws_ecr_repository.docker-image-repo.repository_url
   image_tag_latest = "${local.image_tag_prefix}:latest"
 }
