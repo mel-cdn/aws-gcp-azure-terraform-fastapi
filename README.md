@@ -36,7 +36,7 @@ Ensure the following tools are installed:
     - [Python 3.12+](https://www.python.org/)
 - **Google Cloud Platform (GCP)**
     - [Google Cloud Account](https://console.cloud.google.com/)
-    - [cloud CLI](https://cloud.google.com/sdk/docs/install/)
+    - [gcloud CLI](https://cloud.google.com/sdk/docs/install/)
 - **Amazon Web Services (AWS)**
     - [AWS Account](https://aws.amazon.com/)
     - [AWS CLI](https://aws.amazon.com/cli/)
