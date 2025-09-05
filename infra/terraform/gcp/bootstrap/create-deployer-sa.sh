@@ -20,6 +20,7 @@ ROLES=(
   "roles/iam.serviceAccountAdmin"         # Service Account Admin: Management for service API account (create/update)
   "roles/resourcemanager.projectIamAdmin" # Service Usage Admin: Creating and assigning roles to service account
   "roles/artifactregistry.admin"          # Artifact Registry Administrator: Managing Docker repositories/images management (create/delete)
+  "roles/domains.admin"                   # Administer custom domain mappings
 )
 
 # ROLES=("roles/owner") # Use this, if you don't mind giving super powers
@@ -28,7 +29,8 @@ ROLES=(
 gcloud iam service-accounts create $SA_NAME \
   --project "$PROJECT_ID" \
   --display-name "$SA_DISPLAY_NAME" \
-  --description "$DESCRIPTION"
+  --description "$DESCRIPTION" \
+  >/dev/null || echo "Done."
 
 SA_EMAIL="$SA_NAME@$PROJECT_ID.iam.gserviceaccount.com"
 
