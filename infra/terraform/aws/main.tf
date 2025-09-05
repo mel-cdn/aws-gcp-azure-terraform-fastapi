@@ -21,7 +21,6 @@ module "app_repo" {
   billing_tags = local.billing_tags
 }
 
-
 # ----------------------------------------------------------------------------------------------------------------------
 # App Service
 # ----------------------------------------------------------------------------------------------------------------------
@@ -36,4 +35,15 @@ module "app_service" {
   billing_tags = local.billing_tags
 
   depends_on = [module.app_repo]
+}
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Domain Mapping
+# ----------------------------------------------------------------------------------------------------------------------
+module "domain_mapping" {
+  source                = "./modules/domain_mapping"
+  apprunner_service_arn = module.app_service.arn
+  domain_name           = "${var.environment != "prod" ? "${var.environment}." : ""}api.${var.app_name}.aws.${var.root_domain_name}"
+
+  depends_on = [module.app_service]
 }

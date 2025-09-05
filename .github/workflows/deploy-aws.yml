@@ -26,6 +26,7 @@ jobs:
       REGION: ${{ vars.AWS_REGION }}
       INFRA: ${{ vars.AWS_INFRA }}
       APP_NAME: ${{ vars.APP_NAME }}
+      ROOT_DOMAIN_NAME: ${{ secrets.ROOT_DOMAIN_NAME }}
 
     steps:
       - uses: actions/checkout@v4
@@ -70,6 +71,7 @@ jobs:
             -var="infra=${INFRA}" \
             -var="environment=${ENVIRONMENT}" \
             -var="app_name=${APP_NAME}" \
+            -var="root_domain_name=${ROOT_DOMAIN_NAME}" \
             -out=tfplan
 
       - name: Terraform Apply
