@@ -62,7 +62,7 @@ cd infra/terraform/gcp
 terraform init --backend-config="bucket=<your-gcs-bucket-for-tf-state>"
 
 # Select or create a Terraform workspace (this will act as the ENVIRONMENT e.g. dev)
-terraform workspace select -or-create <environment>>
+terraform workspace select -or-create <environment>
 
 # Format Terraform configuration files
 terraform fmt
@@ -111,6 +111,7 @@ gcloud iam service-accounts keys create key.json --iam-account=<service-account-
     - Add the following secrets:  
       - `GCP_PREFIX` → your project ID prefix
       - `GCP_TERRAFORM_BACKEND_BUCKET_PREFIX`
+      - `ROOT_DOMAIN_NAME` = `mydomain.com`
 3. Add Repository Variables (common across all environments)
     - Navigate to your repository: → Settings → Secrets and variables → Actions → Variables → New repository variable
     - Add the following variables:

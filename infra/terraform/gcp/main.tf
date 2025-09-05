@@ -40,3 +40,18 @@ module "app_service" {
 
   depends_on = [module.app_image]
 }
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Domain Mapping
+# ----------------------------------------------------------------------------------------------------------------------
+module "domain_mapping" {
+  source                 = "./modules/domain_mapping"
+  project_id             = local.project_id
+  region                 = var.region
+  cloud_run_service_name = module.app_service.name
+  domain_name            = "${var.environment != "prod" ? "${var.environment}." : ""}api.${var.app_name}.gcp.${var.root_domain_name}"
+
+  billing_labels = local.billing_labels
+
+  depends_on = [module.app_service]
+}

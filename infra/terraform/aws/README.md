@@ -114,6 +114,7 @@ aws iam create-access-key --user-name <service-account-name>
     - Add the following secrets:
         - `AWS_TERRAFORM_BACKEND_BUCKET`
         - `AWS_TERRAFORM_LOCK_TABLE`
+        - `ROOT_DOMAIN_NAME` = `mydomain.com`
 3. Add Repository Variables (common across all environments)
     - Navigate to your repository: → Settings → Secrets and variables → Actions → Variables → New repository variable
     - Add the following variables:

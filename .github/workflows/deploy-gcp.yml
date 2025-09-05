@@ -25,6 +25,7 @@ jobs:
       TF_BACKEND_GCS_BUCKET: ${{ secrets.GCP_TERRAFORM_BACKEND_BUCKET_PREFIX }}-${{ inputs.environment }}
       REGION: ${{ vars.GCP_REGION }}
       APP_NAME: ${{ vars.APP_NAME }}
+      ROOT_DOMAIN_NAME: ${{ secrets.ROOT_DOMAIN_NAME }}
 
     steps:
       - name: Checkout code
@@ -65,6 +66,7 @@ jobs:
             -var="region=${REGION}" \
             -var="environment=${ENVIRONMENT}" \
             -var="app_name=${APP_NAME}" \
+            -var="root_domain_name=${ROOT_DOMAIN_NAME}" \
             -out=tfplan
 
       - name: Terraform Apply
