@@ -1,6 +1,6 @@
 # Dunder Mifflin Inventory Service
 
-[![PROD Build Status](https://github.com/mel-cdn/dm-inventory-service/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/mel-cdn/dm-inventory-service/actions/workflows/deploy.yml)
+[![PROD Build Status](https://github.com/mel-cdn/dm-inventory-service/actions/workflows/merge -deploy.yml/badge.svg?branch=main)](https://github.com/mel-cdn/dm-inventory-service/actions/workflows/deploy.yml)
 
 ## 📖 Overview
 
@@ -85,8 +85,14 @@ pipenv shell
 
 ### FastAPI Endpoints
 
-- AWS Swagger Docs - https://xzmd8mftmp.ap-southeast-1.awsapprunner.com/swagger
-- GCP Swagger Docs - https://dm-inventory-api-6jqimisapa-de.a.run.app/swagger
+#### AWS Swagger URL
+  > Heads up — this service might be unavailable because I paused it to save on costs (since App Runner doesn’t support 0-minimum instance scaling, haha! 🙂)
+- App Runner: https://xzmd8mftmp.ap-southeast-1.awsapprunner.com/swagger
+- Domain Mapped: https://api.dm-inventory.aws.melcadano.com/swagger
+
+#### GCP Swagger URL
+- Cloud Run: https://dm-inventory-api-6jqimisapa-de.a.run.app/swagger
+- Domain Mapped: https://api.dm-inventory.gcp.melcadano.com/swagger
 
 ## 🗺️ Roadmap / To-Do
 
