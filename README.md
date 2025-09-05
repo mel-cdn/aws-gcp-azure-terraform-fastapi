@@ -109,16 +109,16 @@ pipenv shell
 - [X] Terraform deployment with GCS backend
 - [X] Setup GitHub Actions deployment pipeline
 - [X] Automated deployment to `prod` environment
+- [X] Map service to a domain name
 - [ ] Update GitHub Pipeline to use OIDC instead of Service Account Key
-- [ ] Map service to a domain name
 
 ### Infrastructure (AWS)
 
 - [X] Terraform deployment with S3 backend
 - [X] Setup GitHub Actions deployment pipeline
-- [ ] Automated deployment to `prod` environment
+- [X] Automated deployment to `prod` environment
+- [X] Map service to a domain name
 - [ ] Update GitHub Pipeline to use OIDC instead AWS Keys
-- [ ] Map service to a domain name
 
 ### Infrastructure (Azure)
 
