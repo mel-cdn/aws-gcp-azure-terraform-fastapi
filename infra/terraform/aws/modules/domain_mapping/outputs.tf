@@ -6,6 +6,6 @@ output "dns_target" {
   value = aws_apprunner_custom_domain_association.domain.dns_target
 }
 
-output "url" {
+output "name" {
   value = aws_apprunner_custom_domain_association.domain.domain_name
 }

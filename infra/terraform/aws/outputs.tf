@@ -4,10 +4,9 @@ output "service_url" {
 }
 
 output "domain_url" {
-  value       = "https://${module.domain_mapping.url}"
+  value       = "https://${module.domain_mapping.name}"
   description = "API service URL with domain"
 }
-
 
 output "validation_records" {
   value = module.domain_mapping.validation_records
