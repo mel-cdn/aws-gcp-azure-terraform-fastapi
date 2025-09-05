@@ -25,7 +25,7 @@ jobs:
       TF_BACKEND_GCS_BUCKET: ${{ secrets.GCP_TERRAFORM_BACKEND_BUCKET_PREFIX }}-${{ inputs.environment }}
       REGION: ${{ vars.GCP_REGION }}
       APP_NAME: ${{ vars.APP_NAME }}
-      ROOT_DOMAIN_NAME: ${{ secrets.ROOT_DOMAIN_NAME }}
+      ROOT_DOMAIN_NAME: ${{ vars.ROOT_DOMAIN_NAME }}
 
     steps:
       - name: Checkout code

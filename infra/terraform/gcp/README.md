@@ -109,14 +109,14 @@ gcloud iam service-accounts keys create key.json --iam-account=<service-account-
 3. Add Repository Secrets (common across all environments)
     - Navigate to your repository: → Settings → Secrets and variables → Actions → Secrets → New repository secret
     - Add the following secrets:  
-      - `GCP_PREFIX` → your project ID prefix
-      - `GCP_TERRAFORM_BACKEND_BUCKET_PREFIX`
-      - `ROOT_DOMAIN_NAME` = `mydomain.com`
+        - `GCP_PREFIX` → your project ID prefix
+        - `GCP_TERRAFORM_BACKEND_BUCKET_PREFIX`
 3. Add Repository Variables (common across all environments)
     - Navigate to your repository: → Settings → Secrets and variables → Actions → Variables → New repository variable
     - Add the following variables:
-      - `APP_NAME` = `dm-inventory`
-      - `GCP_REGION` = `asia-east1`
+        - `APP_NAME` = `dm-inventory`
+        - `GCP_REGION` = `asia-east1`
+        - `ROOT_DOMAIN_NAME` = `mydomain.com`
 4. Update GitHub Actions Workflow
     - Ensure your workflow [deploy-gcp template](../../../.github/workflows/deploy-aws.yml) references these secrets.
 5. Trigger Deployment

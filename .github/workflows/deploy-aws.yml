@@ -26,7 +26,7 @@ jobs:
       REGION: ${{ vars.AWS_REGION }}
       INFRA: ${{ vars.AWS_INFRA }}
       APP_NAME: ${{ vars.APP_NAME }}
-      ROOT_DOMAIN_NAME: ${{ secrets.ROOT_DOMAIN_NAME }}
+      ROOT_DOMAIN_NAME: ${{ vars.ROOT_DOMAIN_NAME }}
 
     steps:
       - uses: actions/checkout@v4
