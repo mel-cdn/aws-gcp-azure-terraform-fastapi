@@ -4,9 +4,11 @@
 
 ## 📖 Overview
 
-This repository is a sandbox project for experimenting with **Domain-Driven Design (DDD)** principles using a **FastAPI
-** application across multiple cloud platforms.
+This repository is a sandbox project for experimenting with **Domain-Driven Design (DDD)** principles using a **FastAPI** application across multiple cloud platforms.
 
+It comes with **Terraform** setups for **GCP**, **AWS**, and **Azure**, deployed through **GitHub Actions** pipelines.
+
+It simulates managing paper product inventory, sales personnel, and sales transactions — inspired by *Dunder Mifflin*.
 ## ✨ Highlights
 
 - ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white) Domain-Driven Design architecture
