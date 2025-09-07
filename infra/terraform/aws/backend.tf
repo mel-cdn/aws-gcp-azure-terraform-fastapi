@@ -4,9 +4,8 @@ terraform {
     key    = "default.tfstate"
 
     # Will be populated on deploy or add it manually here
-    bucket         = ""
-    dynamodb_table = ""
-
+    bucket               = ""
+    dynamodb_table       = ""
     workspace_key_prefix = "dm-inventory"
   }
 

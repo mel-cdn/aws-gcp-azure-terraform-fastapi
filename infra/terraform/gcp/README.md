@@ -7,7 +7,7 @@
 Before proceeding, ensure the following are installed and configured:
 
 - **Google Cloud Project**
-    - [Create a Google Cloud Account](https://console.cloud.google.com/)
+    - Create a free [Google Cloud Account](https://console.cloud.google.com/)
     - Install the [gcloud CLI](https://cloud.google.com/sdk/docs/install)
 - **Terraform**
     - Install the [Terraform CLI](https://developer.hashicorp.com/terraform/install)
@@ -28,7 +28,7 @@ gcloud auth application-default login
 ## Boostrap GCP Environment
 
 > The steps below assume the authenticated account has sufficient privileges.
-
+>
 ```bash
 cd infra/terraform/gcp
 

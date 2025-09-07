@@ -7,7 +7,7 @@
 Before proceeding, ensure the following are installed and configured:
 
 - **Amazon Web Services (AWS)**
-    - [Create an AWS Account](https://aws.amazon.com/)
+    - Create a free [AWS Account](https://aws.amazon.com/)
     - Install the [AWS CLI](https://aws.amazon.com/cli/)
 - **Terraform**
     - Install the [Terraform CLI](https://developer.hashicorp.com/terraform/install)
@@ -24,7 +24,7 @@ aws configure --profile <PROFILE_NAME>
 
 ## Boostrap AWS Environment
 
-> Run these with an AWS profile that has sufficient IAM privileges.
+> The steps below assume the authenticated account has sufficient privileges.
 
 ```bash
 # Activate AWS profile
@@ -38,7 +38,7 @@ cd infra/terraform/aws
 
 ## Terraform Setup and Local Deployment
 
-> Run these with an AWS profile that has sufficient IAM privileges.
+> The steps below assume the authenticated account has sufficient privileges.
 
 1. Navigate to the Terraform directory:
 

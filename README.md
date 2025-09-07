@@ -98,13 +98,14 @@ pipenv shell
 
 ## 🗺️ Roadmap / To-Do
 
-### Service
+### Inventory Service
 
 - [X] Initial setup of FastAPI project
 - [ ] Make `PaperProduct` a nested object of `Product`
 - [ ] Add `Salesman` and `Sales` entities
-- [ ] Integrate real database: Cloud Storage (GCP)
 - [ ] Integrate real database: S3 (AWS)
+- [ ] Integrate real database: Cloud Storage (GCP)
+- [ ] Integrate real database: Azure Storage (Azure)
 
 ### Infrastructure (GCP)
 

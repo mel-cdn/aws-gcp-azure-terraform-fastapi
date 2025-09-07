@@ -8,14 +8,14 @@ variable "infra" {
   default = "playground"
 }
 
-variable "environment" {
-  type    = string
-  default = "dev"
-}
-
 variable "app_name" {
   type    = string
   default = "dm-inventory"
+}
+
+variable "environment" {
+  type    = string
+  default = "dev"
 }
 
 variable "root_domain_name" {

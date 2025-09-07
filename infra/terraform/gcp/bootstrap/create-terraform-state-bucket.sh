@@ -6,11 +6,11 @@ set -e -u
 # Example usage:
 #   ./create-terraform-state-bucket.sh <my-project-id> <bucket-name> <region>
 
-echo "> Creating $2 bucket on $3 for project: $1"
-
 PROJECT_ID="$1"
 BUCKET_NAME="$2"
 REGION="$3"
+
+echo "> Creating $BUCKET_NAME Cloud Storage bucket on $REGION for project: $PROJECT_ID"
 
 gcloud storage buckets create gs://"$BUCKET_NAME" \
   --project="$PROJECT_ID" \
