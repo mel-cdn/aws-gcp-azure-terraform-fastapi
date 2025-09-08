@@ -44,6 +44,7 @@ resource "aws_apprunner_service" "service" {
     memory = "1024"
   }
 
+  # Public Access / No Authentication
   network_configuration {
     egress_configuration {
       egress_type = "DEFAULT"

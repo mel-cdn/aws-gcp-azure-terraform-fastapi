@@ -59,4 +59,5 @@ infra/terraform/*/.terraform/
 *.tfstate.backup
 *.tfvars
 *digest.json
+*digest.txt
 *deployer-policy.json
