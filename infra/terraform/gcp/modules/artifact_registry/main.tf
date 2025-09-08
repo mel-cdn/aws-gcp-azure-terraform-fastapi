@@ -22,7 +22,6 @@ locals {
   }
   working_dir      = "${path.root}/../../../" # 3 levels up to the root where Docker requirements resides
   image_tag_prefix = "${var.region}-docker.pkg.dev/${var.project_id}/${var.repo_name}"
-
   image_tag        = "${local.image_tag_prefix}/${var.image_name}" # For cleanup old images
   image_tag_latest = "${local.image_tag_prefix}/${var.image_name}:latest"
 }

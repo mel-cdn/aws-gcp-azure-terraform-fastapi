@@ -1,10 +1,10 @@
 locals {
-  billing_labels = {
+  billing_tags = {
     environment = var.environment
     application = var.app_name
   }
-  resource_prefix       = "${var.infra}-${var.app_name}-${var.environment}"
-  resource_prefix_alnum = lower(replace(local.resource_prefix, "-", ""))
+  resource_prefix = "${var.infra}-${var.app_name}-${var.environment}"
+
 
   api_name = "${var.app_name}-api"
 }
@@ -12,19 +12,30 @@ locals {
 provider "azurerm" {
   features {}
 }
-#
-# # ----------------------------------------------------------------------------------------------------------------------
-# # App Docker Image
-# # ----------------------------------------------------------------------------------------------------------------------
-# module "app_image" {
-#   source         = "./modules/artifact_registry"
-#   project_id     = local.project_id
-#   region         = var.region
-#   repo_name      = "docker-images"
-#   image_name     = "${local.api_name}-image"
-#   billing_labels = local.billing_labels
-# }
-#
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Resource Group
+# ----------------------------------------------------------------------------------------------------------------------
+resource "azurerm_resource_group" "main" {
+  name     = "${local.resource_prefix}-rg"
+  location = var.location
+
+  tags = local.billing_tags
+}
+
+# ----------------------------------------------------------------------------------------------------------------------
+# App Service Image
+# ----------------------------------------------------------------------------------------------------------------------
+module "app_repo" {
+  source              = "./modules/container_registry"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.main.name
+  resource_prefix     = local.resource_prefix
+  repo_name          = "${var.app_name}-api"
+
+  billing_tags = local.billing_tags
+}
+
 # # ----------------------------------------------------------------------------------------------------------------------
 # # App Cloud Run Service
 # # ----------------------------------------------------------------------------------------------------------------------

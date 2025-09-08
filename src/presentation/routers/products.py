@@ -9,8 +9,8 @@ from pydantic import BaseModel, ConfigDict
 from application.services.inventory_service import InventoryService
 from domain.entities.constants.product import ProductType, Unit
 from domain.repositories.product_repository import ProductRepository
-from presentation.rest.dependencies.auth import get_current_user
-from presentation.rest.dependencies.services import (
+from presentation.dependencies import (
+    get_current_user,
     get_inventory_service,
     get_product_repository,
 )

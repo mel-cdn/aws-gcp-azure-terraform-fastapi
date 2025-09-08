@@ -32,9 +32,6 @@ az account show
 ```bash
 # For Terraform Backend (e.g. playground-tf-state-rg)
 az group create --name "<infra>-tf-state-rg" --location <location>
-
-# For App Services and Resources and Environment specific (e.g. playground-dm-inventory-dev-rg)
-az group create --name "<infra>-<app-name>-<environment>-rg" --location <location>
 ```
 2. Create a Storage Account for Terraform state:
 ```bash
@@ -53,11 +50,8 @@ cd infra/terraform/azure
 cd infra/terraform/azure
 ```
 
-2. Open `variables.tf` and update the `project_prefix` variable with your GCP project’s deployment prefix.
-    - This value will be appended with the `ENVIRONMENT`.
-    - **Example**: If `ENVIRONMENT` = `dev`, and `project_prefix` = `my-project-prefix`, the final project ID will be
-      `my-project-prefix-dev`.
-    - You may also use [.tfvars](https://developer.hashicorp.com/terraform/language/values/variables#assigning-values-to-root-module-variables).
+2. Open `variables.tf` and update with your actual values. You may also
+   use [.tfvars](https://developer.hashicorp.com/terraform/language/values/variables#assigning-values-to-root-module-variables).
 3. Run the following commands to initialize and deploy:
 
 ```bash

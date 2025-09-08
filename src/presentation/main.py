@@ -6,7 +6,7 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from presentation.rest.routers import products
+from presentation.routers import products
 
 
 def create_app(version: str, environment: str) -> FastAPI:
