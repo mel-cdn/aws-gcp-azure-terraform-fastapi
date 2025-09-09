@@ -54,8 +54,8 @@ Ensure the following tools are installed:
 
 ```bash
 # Clone repository
-git clone git@github.com:mel-cdn/dm-inventory-service.git
-cd dm-inventory-service
+git clone git@github.com:mel-cdn/aws-gcp-azure-terraform-fastapi.git
+cd aws-gcp-azure-terraform-fastapi
 
 # Install Pipenv
 pip install pipenv==2025.0.4
@@ -84,6 +84,7 @@ pipenv shell
 
 - [AWS via Terraform](infra/terraform/aws/README.md)
 - [GCP via Terraform](infra/terraform/gcp/README.md)
+- [Azure via Terraform](infra/terraform/azure/README.md)
 
 ### FastAPI Endpoints
 
@@ -95,6 +96,10 @@ pipenv shell
 #### GCP Swagger URL
 - Cloud Run: https://dm-inventory-api-6jqimisapa-de.a.run.app/swagger
 - Domain Mapped: https://api.dm-inventory.gcp.melcadano.com/swagger
+
+#### Azure Swagger URL
+- Container App: https://dm-inventory-api-6jqimisapa-de.a.run.app/swagger
+- Domain Mapped: https://api.dm-inventory.azure.melcadano.com/swagger
 
 ## 🗺️ Roadmap / To-Do
 

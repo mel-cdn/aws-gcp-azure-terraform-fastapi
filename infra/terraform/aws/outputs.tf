@@ -9,9 +9,15 @@ output "domain_url" {
 }
 
 output "validation_records" {
-  value = module.domain_mapping.validation_records
+  description = "DNS record required in your domain hosting for validation"
+  value       = module.domain_mapping.validation_records
 }
 
 output "dns_target" {
-  value = module.domain_mapping.dns_target
+  description = "DNS record required in your domain hosting for validation"
+  value = {
+    type  = "CNAME"
+    host  = module.domain_mapping.name
+    value = module.domain_mapping.dns_target
+  }
 }

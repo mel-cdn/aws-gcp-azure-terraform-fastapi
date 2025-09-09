@@ -9,5 +9,6 @@ output "domain_url" {
 }
 
 output "dns_records" {
-  value = module.domain_mapping.dns_records
+  description = "DNS record required in your domain hosting for validation"
+  value       = module.domain_mapping.dns_records
 }
