@@ -113,7 +113,6 @@ resource "null_resource" "push-image" {
 
         echo "> Retrieving the image's latest digest..."
         DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${local.image_tag_latest} | cut -d'@' -f2)
-        # Pass digest back to Terraform by writing to a triggers file
         echo "{ \"digest\": \"$DIGEST\" }" > digest.json
         EOF
   }

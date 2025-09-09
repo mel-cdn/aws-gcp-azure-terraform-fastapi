@@ -41,6 +41,6 @@ def create_app(version: str, environment: str) -> FastAPI:
     return inventory_app
 
 
-app = create_app(version="0.0.12", environment=os.environ["ENVIRONMENT"])
+app = create_app(version="0.0.13", environment=os.environ["ENVIRONMENT"])
 # Include routers
 app.include_router(products.router, prefix="/products", tags=["Products"])

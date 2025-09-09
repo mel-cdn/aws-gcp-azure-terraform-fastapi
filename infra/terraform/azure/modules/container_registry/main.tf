@@ -21,16 +21,16 @@ locals {
   normalized_billing_tags = {
     for k, v in var.billing_tags : lower(k) => lower(v)
   }
-  working_dir = "${path.root}/../../../" # 3 levels up to the root where Docker requirements resides
+  working_dir           = "${path.root}/../../../" # 3 levels up to the root where Docker requirements resides
   resource_prefix_alnum = lower(replace(var.resource_prefix, "-", ""))
-  repo_tag_latest = "${azurerm_container_registry.container.login_server}/${var.repo_name}:latest"
+  repo_tag_latest       = "${azurerm_container_registry.container.login_server}/${var.repo_name}:latest"
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Retrieve created resources for outputs
 # ----------------------------------------------------------------------------------------------------------------------
 data "local_file" "image_digest" {
-  filename = "${local.working_dir}digest.txt"
+  filename = "${local.working_dir}digest.json"
 
   depends_on = [
     null_resource.push-image
@@ -89,7 +89,8 @@ resource "null_resource" "push-image" {
         docker push ${local.repo_tag_latest}
 
         echo "> Retrieving the image's latest digest..."
-        docker inspect --format='{{index .RepoDigests 0}}' ${local.repo_tag_latest} > digest.txt
+        DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${local.repo_tag_latest} | cut -d'@' -f2)
+        echo "{ \"digest\": \"$DIGEST\" }" > digest.json
         EOF
   }
   depends_on = [null_resource.build-image]

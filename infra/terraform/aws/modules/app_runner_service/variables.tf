@@ -15,7 +15,7 @@ variable "resource_prefix" {
   type = string
 }
 
-variable "repo_image_latest_digest_url" {
+variable "repo_image_latest_digest" {
   type = string
 }
 

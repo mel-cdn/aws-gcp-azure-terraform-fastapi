@@ -4,9 +4,6 @@ locals {
     application = var.app_name
   }
   resource_prefix = "${var.infra}-${var.app_name}-${var.environment}"
-
-
-  api_name = "${var.app_name}-api"
 }
 
 provider "azurerm" {
@@ -31,27 +28,27 @@ module "app_repo" {
   location            = var.location
   resource_group_name = azurerm_resource_group.main.name
   resource_prefix     = local.resource_prefix
-  repo_name          = "${var.app_name}-api"
+  repo_name           = "${var.app_name}-api"
 
   billing_tags = local.billing_tags
 }
 
-# # ----------------------------------------------------------------------------------------------------------------------
-# # App Cloud Run Service
-# # ----------------------------------------------------------------------------------------------------------------------
-# module "app_service" {
-#   source          = "./modules/cloud_run_service"
-#   environment     = var.environment
-#   project_id      = local.project_id
-#   region          = var.region
-#   service_name    = local.api_name
-#   service_account = google_service_account.api_service_account.email
-#   container_image = "${module.app_image.tag}@${module.app_image.latest_digest}"
-#
-#   billing_labels = local.billing_labels
-#
-#   depends_on = [module.app_image]
-# }
+# ----------------------------------------------------------------------------------------------------------------------
+# App Service
+# ----------------------------------------------------------------------------------------------------------------------
+module "app_service" {
+  source                   = "./modules/container_app"
+  resource_prefix          = local.resource_prefix
+  environment              = var.environment
+  location                 = var.location
+  resource_group_name      = azurerm_resource_group.main.name
+  container_registry_name  = module.app_repo.container_name
+  repo_image_latest_digest = "${module.app_repo.image_latest_tag}@${module.app_repo.image_latest_digest}"
+
+  billing_tags = local.billing_tags
+  depends_on   = [module.app_repo]
+}
+
 #
 # # ----------------------------------------------------------------------------------------------------------------------
 # # Domain Mapping

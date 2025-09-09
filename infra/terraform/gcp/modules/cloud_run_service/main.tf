@@ -32,14 +32,14 @@ resource "google_cloud_run_v2_service" "service" {
   deletion_protection = false
 
   # Public Access / No Authentication
-  ingress             = "INGRESS_TRAFFIC_ALL"
+  ingress = "INGRESS_TRAFFIC_ALL"
 
   template {
     service_account                  = var.service_account
     timeout                          = "120s"
     max_instance_request_concurrency = 1
     containers {
-      image = var.container_image
+      image = var.container_image_latest_digest
       ports {
         container_port = 8080
       }

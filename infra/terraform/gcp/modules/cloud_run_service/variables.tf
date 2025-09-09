@@ -23,7 +23,7 @@ variable "service_account" {
   type = string
 }
 
-variable "container_image" {
+variable "container_image_latest_digest" {
   type        = string
   description = <<EOT
 Container image reference for the Cloud Run service.

@@ -28,13 +28,13 @@ module "app_image" {
 # App Service
 # ----------------------------------------------------------------------------------------------------------------------
 module "app_service" {
-  source          = "./modules/cloud_run_service"
-  environment     = var.environment
-  project_id      = local.project_id
-  region          = var.region
-  service_name    = local.api_name
-  service_account = google_service_account.api_service_account.email
-  container_image = "${module.app_image.tag}@${module.app_image.latest_digest}"
+  source                        = "./modules/cloud_run_service"
+  environment                   = var.environment
+  project_id                    = local.project_id
+  region                        = var.region
+  service_name                  = local.api_name
+  service_account               = google_service_account.api_service_account.email
+  container_image_latest_digest = "${module.app_image.latest_tag}@${module.app_image.latest_digest}"
 
   billing_labels = local.billing_labels
 

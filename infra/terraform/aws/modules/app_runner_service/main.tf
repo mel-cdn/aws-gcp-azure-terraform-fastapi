@@ -23,7 +23,7 @@ resource "aws_apprunner_service" "service" {
 
   source_configuration {
     image_repository {
-      image_identifier      = var.repo_image_latest_digest_url
+      image_identifier      = var.repo_image_latest_digest
       image_repository_type = "ECR"
       image_configuration {
         port = "8080"
