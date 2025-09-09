@@ -80,3 +80,42 @@ terraform apply
 ```
 
 ## Setup CI/CD Deployment
+
+### Create a Deployer Service Account
+
+This project uses [GitHub Actions](https://github.com/features/actions) for CI/CD.
+Refer to the [deployment workflow template](../../../.github/workflows/deploy-azure.yml) for integration.
+
+The following script creates a CI/CD service account and assigns the required roles.
+```bash
+# Create Azure Service Principal
+az ad sp create-for-rbac \
+  --name dm-tf-deployer-sa \
+  --role Contributor \
+  --scopes /subscriptions/<SUBSCRIPTION_ID> \
+  --sdk-auth
+
+# Save the JSON output for next steps
+```
+
+### GitHub Actions Setup
+
+Once your service account has been created, follow these steps to integrate it with GitHub Actions:
+
+1. Add Repository Secrets (common across all environments)
+    - Navigate to your repository: → Settings → Secrets and variables → Actions → Secrets → New repository secret
+    - Add the following secrets:
+        - `AZURE_CREDENTIALS` → JSON output from the previous step
+        - `AZURE_TF_STORAGE_ACCOUNT` → result from [bootstrap step](#bootstrap-azure-environment)
+2. Add Repository Variables (common across all environments)
+    - Navigate to your repository: → Settings → Secrets and variables → Actions → Variables → New repository variable
+    - Add the following variables:
+        - `APP_NAME` = `dm-inventory`
+        - `AZURE_TF_RESOURCE_GROUP` → result from [bootstrap step](#bootstrap-azure-environment)
+        - `AZURE_INFRA` = `playground`
+        - `AZURE_LOCATION` = `southeastasia`
+3. Update GitHub Actions Workflow
+    - Ensure your workflow [deploy-azure template](../../../.github/workflows/deploy-azure.yml) references these secrets.
+4. Trigger Deployment
+    - Push changes to your target branch (e.g., `develop` or `main`).
+    - GitHub Actions will automatically run the Terraform deployment workflow.

@@ -63,3 +63,10 @@ jobs:
     secrets: inherit
     with:
       environment: ${{ needs.setup_environment.outputs.target_environment }}
+
+  deploy_azure:
+    needs: [ setup_environment, lint_and_unit_tests ]
+    uses: ./.github/workflows/deploy-azure.yml
+    secrets: inherit
+    with:
+      environment: ${{ needs.setup_environment.outputs.target_environment }}

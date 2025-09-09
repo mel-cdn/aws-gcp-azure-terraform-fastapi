@@ -4,8 +4,8 @@ output "service_url" {
 }
 
 output "domain_url" {
+  description = "Custom domain URL (after DNS validation completes)"
   value       = "https://${module.domain_mapping.name}"
-  description = "API service URL with domain"
 }
 
 output "validation_records" {

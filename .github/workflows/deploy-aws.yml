@@ -29,7 +29,8 @@ jobs:
       ROOT_DOMAIN_NAME: ${{ vars.ROOT_DOMAIN_NAME }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4

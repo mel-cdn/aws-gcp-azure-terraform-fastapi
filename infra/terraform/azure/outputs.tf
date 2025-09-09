@@ -7,16 +7,15 @@ output "service_url" {
   description = "API service URL"
 }
 
-# output "service_url" {
-#   value       = module.app_service.url
-#   description = "API service URL"
-# }
-#
 # output "domain_url" {
+#   description = "Custom domain URL (after DNS validation completes)"
 #   value       = "https://${module.domain_mapping.name}"
-#   description = "API service URL with domain"
 # }
 #
-# output "dns_records" {
-#   value = module.domain_mapping.dns_records
+# output "certificate_validation_record" {
+#   value = {
+#     name  = "asuid.api"
+#     type  = "TXT"
+#     value = module.domain_mapping.certificate_validation_token
+#   }
 # }

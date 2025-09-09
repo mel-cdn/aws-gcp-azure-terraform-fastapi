@@ -24,6 +24,6 @@ variable "environment" {
 # The base domain name you have registered.
 #
 # - Example: mydomain.com
-# - Full domain URLs will follow the pattern: <environment>.api.<app_name>.gcp.mydomain.com
+# - Full domain URLs will follow the pattern: <environment>.api.<app_name>.azure.mydomain.com
 # EOT
 # }

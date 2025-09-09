@@ -107,22 +107,22 @@ aws iam create-access-key --user-name <service-account-name>
       New environment
     - Create an environment (e.g., `dev`).
     - Add the following secrets with values from the previous step:
-        - `AWS_ACCESS_KEY_ID`
-        - `AWS_SECRET_ACCESS_KEY`
+        - `AWS_ACCESS_KEY_ID` → result from previous step
+        - `AWS_SECRET_ACCESS_KEY` → result from previous step
 3. Add Repository Secrets (common across all environments)
     - Navigate to your repository: → Settings → Secrets and variables → Actions → Secrets → New repository secret
     - Add the following secrets:
-        - `AWS_TERRAFORM_BACKEND_BUCKET`
-        - `AWS_TERRAFORM_LOCK_TABLE`
-3. Add Repository Variables (common across all environments)
+        - `AWS_TERRAFORM_BACKEND_BUCKET` → result from [bootstrap step](#bootstrap-azure-environment)
+        - `AWS_TERRAFORM_LOCK_TABLE` → result from [bootstrap step](#bootstrap-azure-environment)
+4. Add Repository Variables (common across all environments)
     - Navigate to your repository: → Settings → Secrets and variables → Actions → Variables → New repository variable
     - Add the following variables:
         - `APP_NAME` = `dm-inventory`
         - `AWS_INFRA` = `playground`
         - `AWS_REGION` = `ap-southeast-1`
         - `ROOT_DOMAIN_NAME` = `mydomain.com`
-4. Update GitHub Actions Workflow
+5. Update GitHub Actions Workflow
     - Ensure your workflow [deploy-aws template](../../../.github/workflows/deploy-aws.yml) references these secrets.
-5. Trigger Deployment
+6. Trigger Deployment
     - Push changes to your target branch (e.g., `develop` or `main`).
     - GitHub Actions will automatically run the Terraform deployment workflow.
