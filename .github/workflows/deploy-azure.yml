@@ -71,7 +71,7 @@ jobs:
         working-directory: ./infra/terraform/azure
         run: |
           terraform plan \
-            -var="region=${LOCATION}" \
+            -var="location=${LOCATION}" \
             -var="infra=${INFRA}" \
             -var="environment=${ENVIRONMENT}" \
             -var="app_name=${APP_NAME}" \
