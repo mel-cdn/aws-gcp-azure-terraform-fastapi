@@ -58,6 +58,5 @@ infra/terraform/*/.terraform/
 *.tfstate
 *.tfstate.backup
 *.tfvars
-*digest.json
-*digest.txt
+digest_azure.json
 *deployer-policy.json
