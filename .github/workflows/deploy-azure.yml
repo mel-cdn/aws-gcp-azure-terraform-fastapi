@@ -65,7 +65,7 @@ jobs:
             -backend-config="resource_group_name=${TF_RESOURCE_GROUP}" \
             -backend-config="storage_account_name=${TF_STORAGE_ACCOUNT}" \
             -backend-config="container_name=terraform-state" \
-            -backend-config="key=${APP_NAME}/{ENVIRONMENT}.tfstate"
+            -backend-config="key=${APP_NAME}/${ENVIRONMENT}.tfstate"
 
       - name: Terraform Plan
         working-directory: ./infra/terraform/azure
