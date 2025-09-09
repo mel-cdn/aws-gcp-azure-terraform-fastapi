@@ -17,7 +17,7 @@ locals {
 # ----------------------------------------------------------------------------------------------------------------------
 # Domain Mapping
 # ----------------------------------------------------------------------------------------------------------------------
-resource "google_cloud_run_domain_mapping" "domain" {
+resource "google_cloud_run_domain_mapping" "map" {
   location = var.region
   name     = var.domain_name
 
