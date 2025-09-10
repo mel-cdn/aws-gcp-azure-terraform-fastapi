@@ -7,6 +7,6 @@ variable "roles" {
   description = "Refer to https://cloud.google.com/iam/docs/roles-overview"
 }
 
-variable "email" {
+variable "service_account_name" {
   type = string
 }

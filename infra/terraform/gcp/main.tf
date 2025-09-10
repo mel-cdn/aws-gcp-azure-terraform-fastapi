@@ -13,6 +13,18 @@ provider "google" {
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
+# App Service Account
+# ----------------------------------------------------------------------------------------------------------------------
+module "service_account" {
+  source               = "./modules/service_account"
+  project_id           = local.project_id
+  service_account_name = "${local.api_name}-sa"
+  roles = [
+    "roles/iam.serviceAccountUser",
+  ]
+}
+
+# ----------------------------------------------------------------------------------------------------------------------
 # App Service Image
 # ----------------------------------------------------------------------------------------------------------------------
 module "app_image" {
@@ -33,7 +45,7 @@ module "app_service" {
   project_id                    = local.project_id
   region                        = var.region
   service_name                  = local.api_name
-  service_account               = google_service_account.api_service_account.email
+  service_account_email         = module.service_account.email
   container_image_latest_digest = "${module.app_image.latest_tag}@${module.app_image.latest_digest}"
 
   billing_labels = local.billing_labels
