@@ -12,6 +12,11 @@ Before proceeding, ensure the following are installed and configured:
 - **Terraform**
     - Install the [Terraform CLI](https://developer.hashicorp.com/terraform/install)
 
+### GCP Services Used
+- **Artifact Registry** → Stores Docker images.
+- **Cloud Run** → Runs the FastAPI application in a serverless container.
+- **IAM Roles** → Grants pull access to Artifact Registry.
+
 ### Authenticate Google Cloud Credentials
 
 ```bash

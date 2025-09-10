@@ -63,14 +63,13 @@ module "app_service" {
   depends_on   = [module.app_repo]
 }
 
-#
-# # ----------------------------------------------------------------------------------------------------------------------
-# # Domain Mapping
-# # ----------------------------------------------------------------------------------------------------------------------
-# module "domain_mapping" {
-#   source           = "./modules/domain_mapping"
-#   container_app_id = module.app_service.container_app_id
-#   domain_name      = "${var.environment != "prod" ? "${var.environment}." : ""}api.${var.app_name}.azure.${var.root_domain_name}"
-#
-#   depends_on = [module.app_service]
-# }
+# ----------------------------------------------------------------------------------------------------------------------
+# Domain Mapping
+# ----------------------------------------------------------------------------------------------------------------------
+module "domain_mapping" {
+  source           = "./modules/domain_mapping"
+  container_app_id = module.app_service.container_app_id
+  domain_name      = "${var.environment != "prod" ? "${var.environment}." : ""}api.${var.app_name}.azure.${var.root_domain_name}"
+
+  depends_on = [module.app_service]
+}

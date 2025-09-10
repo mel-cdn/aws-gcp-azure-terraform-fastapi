@@ -12,6 +12,12 @@ Before proceeding, ensure the following are installed and configured:
 - **Terraform**
   - Install the [Terraform CLI](https://developer.hashicorp.com/terraform/install)
 
+### Azure Services Used
+- **Azure Container Registry (ACR)** → Stores Docker images for deployment.
+- **Azure Container Apps** → Hosts and runs the FastAPI application.
+- **Azure Resource Group** → Logical container for managing all related resources.
+- **Azure Role Assignments** → Provides secure access (e.g., ACR Pull role for Container App).
+
 ### Authenticate Azure Credentials
 
 ```bash

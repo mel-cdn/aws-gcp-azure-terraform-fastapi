@@ -1,11 +1,11 @@
-variable "resource_group_name" {
-  type = string
-}
-
 variable "container_app_id" {
   type = string
 }
 
 variable "domain_name" {
-  type = string
+  type        = string
+  description = <<EOT
+  Full domain name
+- Example: dev.sub.domain.mydomain.com
+EOT
 }

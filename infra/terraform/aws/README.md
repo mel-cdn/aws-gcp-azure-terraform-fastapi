@@ -12,6 +12,11 @@ Before proceeding, ensure the following are installed and configured:
 - **Terraform**
     - Install the [Terraform CLI](https://developer.hashicorp.com/terraform/install)
 
+### AWS Services Used
+- **Amazon Elastic Container Registry (ECR)** → Stores Docker images.
+- **AWS App Runner** → Runs the FastAPI application.
+- **IAM Roles / Policies** → Grants ECR pull access.
+
 ### Authenticate AWS Credentials
 
 ```bash
