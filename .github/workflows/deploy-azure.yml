@@ -26,6 +26,7 @@ jobs:
       LOCATION: ${{ vars.AZURE_LOCATION }}
       INFRA: ${{ vars.AZURE_INFRA }}
       APP_NAME: ${{ vars.APP_NAME }}
+      ROOT_DOMAIN_NAME: ${{ vars.ROOT_DOMAIN_NAME }}
 
     steps:
       - name: Checkout code
@@ -77,6 +78,7 @@ jobs:
             -var="infra=${INFRA}" \
             -var="environment=${ENVIRONMENT}" \
             -var="app_name=${APP_NAME}" \
+            -var="root_domain_name=${ROOT_DOMAIN_NAME}" \
             -out=tfplan
 
       - name: Terraform Apply
