@@ -21,6 +21,18 @@ resource "azurerm_resource_group" "main" {
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
+# App Service Account
+# ----------------------------------------------------------------------------------------------------------------------
+module "service_account" {
+  source              = "./modules/service_account"
+  resource_prefix     = local.resource_prefix
+  resource_group_name = azurerm_resource_group.main.name
+  location            = var.location
+
+  billing_tags = local.billing_tags
+}
+
+# ----------------------------------------------------------------------------------------------------------------------
 # App Service Image
 # ----------------------------------------------------------------------------------------------------------------------
 module "app_repo" {
@@ -37,13 +49,15 @@ module "app_repo" {
 # App Service
 # ----------------------------------------------------------------------------------------------------------------------
 module "app_service" {
-  source                   = "./modules/container_app"
-  resource_prefix          = local.resource_prefix
-  environment              = var.environment
-  location                 = var.location
-  resource_group_name      = azurerm_resource_group.main.name
-  container_registry_name  = module.app_repo.container_name
-  repo_image_latest_digest = "${module.app_repo.image_latest_tag}@${module.app_repo.image_latest_digest}"
+  source                       = "./modules/container_app"
+  resource_prefix              = local.resource_prefix
+  environment                  = var.environment
+  location                     = var.location
+  resource_group_name          = azurerm_resource_group.main.name
+  container_registry_name      = module.app_repo.container_name
+  repo_image_latest_digest     = "${module.app_repo.image_latest_tag}@${module.app_repo.image_latest_digest}"
+  service_account_principal_id = module.service_account.principal_id
+  service_account_id           = module.service_account.id
 
   billing_tags = local.billing_tags
   depends_on   = [module.app_repo]

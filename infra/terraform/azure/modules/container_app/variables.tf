@@ -26,3 +26,11 @@ variable "container_registry_name" {
 variable "repo_image_latest_digest" {
   type = string
 }
+
+variable "service_account_principal_id" {
+  type = string
+}
+
+variable "service_account_id" {
+  type = string
+}

@@ -19,7 +19,7 @@ Before proceeding, ensure the following are installed and configured:
 gcloud init
 
 # Set your default project
-gcloud config set project <YOUR-GCP-ID>
+gcloud config set project <my-project-id>
 
 # Configure application default credentials (for SDKs and integrations)
 gcloud auth application-default login

@@ -61,7 +61,7 @@ terraform init \
   --backend-config="resource_group_name=<resource-group-name>" \
   --backend-config="storage_account_name=<storage-account-name>" \
   --backend-config="container_name=<container-name>" \
-  --backend-config="key=<app-name>/<environment>.tfstate"
+  --backend-config="key=<app-name>.tfstate"
 
 # Select or create a Terraform workspace (this will act as the ENVIRONMENT e.g. dev)
 terraform workspace select -or-create <environment>
@@ -91,7 +91,7 @@ The following script creates a CI/CD service account and assigns the required ro
 # Create Azure Service Principal
 az ad sp create-for-rbac \
   --name dm-tf-deployer-sa \
-  --role Contributor \
+  --role "User Access Administrator" \
   --scopes /subscriptions/<SUBSCRIPTION_ID> \
   --sdk-auth
 

@@ -52,13 +52,13 @@ resource "azurerm_container_app" "container" {
   # Application Service Account
   identity {
     type         = "UserAssigned"
-    identity_ids = [azurerm_user_assigned_identity.identity.id]
+    identity_ids = [var.service_account_id]
   }
 
   # Service Account to Pull Service Image
   registry {
     server   = data.azurerm_container_registry.container.login_server
-    identity = azurerm_user_assigned_identity.identity.id
+    identity = var.service_account_id
   }
 
   template {
