@@ -29,8 +29,4 @@ resource "google_cloud_run_domain_mapping" "map" {
     namespace = var.project_id
     labels    = local.normalized_billing_labels
   }
-
-  lifecycle {
-    ignore_changes = [location, name]
-  }
 }
