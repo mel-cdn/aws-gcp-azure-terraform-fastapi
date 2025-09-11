@@ -98,7 +98,7 @@ pipenv shell
 - Domain Mapped: https://api.dm-inventory.gcp.melcadano.com/swagger
 
 #### Azure Swagger URL
-- Container App: https://dm-inventory-api-6jqimisapa-de.a.run.app/swagger
+- Container App: https://playground-dm-inventory-prod-aca.proudwave-14ef48de.southeastasia.azurecontainerapps.io/swagger
 - Domain Mapped: https://api.dm-inventory.azure.melcadano.com/swagger
 
 ## 🗺️ Roadmap / To-Do
