@@ -15,4 +15,8 @@ resource "azurerm_container_app_custom_domain" "map" {
   name                     = var.domain_name
   container_app_id         = var.container_app_id
   certificate_binding_type = "Disabled"
+
+  lifecycle {
+    ignore_changes = [name, container_app_id]
+  }
 }

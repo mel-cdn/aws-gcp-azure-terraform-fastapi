@@ -14,4 +14,8 @@ terraform {
 resource "aws_apprunner_custom_domain_association" "map" {
   service_arn = var.apprunner_service_arn
   domain_name = var.domain_name
+
+  lifecycle {
+    ignore_changes = [service_arn, domain_name]
+  }
 }

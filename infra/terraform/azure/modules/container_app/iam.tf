@@ -15,8 +15,6 @@ resource "azurerm_role_assignment" "acr_pull" {
   principal_id         = var.service_account_principal_id
 
   lifecycle {
-    ignore_changes = [
-      principal_id, scope
-    ]
+    ignore_changes = [principal_id, scope]
   }
 }
