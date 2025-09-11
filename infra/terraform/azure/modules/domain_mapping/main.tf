@@ -14,9 +14,9 @@ terraform {
 resource "azurerm_container_app_custom_domain" "map" {
   name                     = var.domain_name
   container_app_id         = var.container_app_id
-  certificate_binding_type = "Disabled"
+  certificate_binding_type = "SniEnabled"
 
   lifecycle {
-    ignore_changes = [name, container_app_id]
+    ignore_changes = [certificate_binding_type, name, container_app_id]
   }
 }

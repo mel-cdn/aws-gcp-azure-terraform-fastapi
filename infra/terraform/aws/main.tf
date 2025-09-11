@@ -4,6 +4,7 @@ locals {
     application = var.app_name
   }
   resource_prefix = "${var.infra}-${var.app_name}-${var.environment}"
+  app_name_alnum  = lower(replace(var.app_name, "-", ""))
 }
 
 provider "aws" {
@@ -43,7 +44,7 @@ module "app_service" {
 module "domain_mapping" {
   source                = "./modules/domain_mapping"
   apprunner_service_arn = module.app_service.arn
-  domain_name           = "${var.environment != "prod" ? "${var.environment}." : ""}api.${var.app_name}.aws.${var.root_domain_name}"
+  domain_name           = "${var.environment != "prod" ? "${var.environment}." : ""}api.${local.app_name_alnum}.aws.${var.root_domain_name}"
 
   depends_on = [module.app_service]
 }

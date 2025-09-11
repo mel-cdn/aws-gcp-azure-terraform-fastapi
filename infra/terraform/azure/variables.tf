@@ -24,6 +24,7 @@ variable "root_domain_name" {
 The base domain name you have registered.
 
 - Example: mydomain.com
-- Full domain URLs will follow the pattern: <environment>.api.<app_name>.azure.mydomain.com
+- Full domain URLs will follow the pattern: <environment>-api-<app_name>-azure-mydomain.com
+- Dashes, Azure does not support multi-level sub-domain for binding_type = "SniEnabled"
 EOT
 }

@@ -91,15 +91,16 @@ pipenv shell
 #### AWS Swagger URL
   > Heads up — this service might be unavailable because I paused it to save on costs (since App Runner doesn’t support 0-minimum instance scaling, haha! 🙂)
 - App Runner: https://xzmd8mftmp.ap-southeast-1.awsapprunner.com/swagger
-- Domain Mapped: https://api.dm-inventory.aws.melcadano.com/swagger
+- Domain Mapped: https://api.dminventory.aws.melcadano.com/swagger
 
 #### GCP Swagger URL
 - Cloud Run: https://dm-inventory-api-6jqimisapa-de.a.run.app/swagger
-- Domain Mapped: https://api.dm-inventory.gcp.melcadano.com/swagger
+- Domain Mapped: https://api.dminventory.gcp.melcadano.com/swagger
 
 #### Azure Swagger URL
 - Container App: https://playground-dm-inventory-prod-aca.proudwave-14ef48de.southeastasia.azurecontainerapps.io/swagger
-- Domain Mapped: https://api.dm-inventory.azure.melcadano.com/swagger
+- Domain Mapped: https://api-dminventory-azure.melcadano.com/swagger
+> Dashes, because Azure does not support multi-level sub-domain for binding_type = "SniEnabled" 🙂
 
 ## 🗺️ Roadmap / To-Do
 

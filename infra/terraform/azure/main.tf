@@ -4,6 +4,7 @@ locals {
     application = var.app_name
   }
   resource_prefix = "${var.infra}-${var.app_name}-${var.environment}"
+  app_name_alnum  = lower(replace(var.app_name, "-", ""))
 }
 
 provider "azurerm" {
@@ -69,7 +70,7 @@ module "app_service" {
 module "domain_mapping" {
   source           = "./modules/domain_mapping"
   container_app_id = module.app_service.container_app_id
-  domain_name      = "${var.environment != "prod" ? "${var.environment}." : ""}api.${var.app_name}.azure.${var.root_domain_name}"
+  domain_name      = "${var.environment != "prod" ? "${var.environment}-" : ""}api-${local.app_name_alnum}-azure.${var.root_domain_name}"
 
   depends_on = [module.app_service]
 }

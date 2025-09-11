@@ -3,8 +3,9 @@ locals {
     environment = var.environment
     application = var.app_name
   }
-  project_id = "${var.project_prefix}-${var.environment}"
-  api_name   = "${var.app_name}-api"
+  project_id     = "${var.project_prefix}-${var.environment}"
+  api_name       = "${var.app_name}-api"
+  app_name_alnum = lower(replace(var.app_name, "-", ""))
 }
 
 provider "google" {
@@ -61,7 +62,7 @@ module "domain_mapping" {
   project_id             = local.project_id
   region                 = var.region
   cloud_run_service_name = module.app_service.name
-  domain_name            = "${var.environment != "prod" ? "${var.environment}." : ""}api.${var.app_name}.gcp.${var.root_domain_name}"
+  domain_name            = "${var.environment != "prod" ? "${var.environment}." : ""}api.${local.app_name_alnum}.gcp.${var.root_domain_name}"
 
   billing_labels = local.billing_labels
 
