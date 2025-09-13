@@ -131,7 +131,7 @@ pipenv shell
 
 ### Infrastructure (Azure)
 
-- [ ] Terraform deployment with backend
-- [ ] Setup GitHub Actions deployment pipeline
-- [ ] Automated deployment to `prod` environment
-- [ ] Map service to a domain name
+- [X] Terraform deployment with backend
+- [X] Setup GitHub Actions deployment pipeline
+- [X] Automated deployment to `prod` environment
+- [X] Map service to a domain name
