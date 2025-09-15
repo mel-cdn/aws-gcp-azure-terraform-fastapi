@@ -57,7 +57,12 @@ resource "google_cloud_run_v2_service" "service" {
         name  = "LOG_LEVEL"
         value = "DEBUG"
       }
+      env {
+        name  = "CLOUD_PROVIDER"
+        value = "GCP"
+      }
     }
+
     scaling {
       max_instance_count = 1
       min_instance_count = 0

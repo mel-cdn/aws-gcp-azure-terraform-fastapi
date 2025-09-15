@@ -28,8 +28,9 @@ resource "aws_apprunner_service" "service" {
       image_configuration {
         port = "8080"
         runtime_environment_variables = {
-          ENVIRONMENT = var.environment
-          LOG_LEVEL   = "DEBUG"
+          ENVIRONMENT    = var.environment
+          LOG_LEVEL      = "DEBUG"
+          CLOUD_PROVIDER = "AWS"
         }
       }
     }

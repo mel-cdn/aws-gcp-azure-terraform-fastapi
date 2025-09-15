@@ -76,6 +76,11 @@ resource "azurerm_container_app" "container" {
         name  = "LOG_LEVEL"
         value = "DEBUG"
       }
+      env {
+        name  = "CLOUD_PROVIDER"
+        value = "Azure"
+      }
+
     }
     min_replicas = 0
     max_replicas = 2

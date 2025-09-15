@@ -9,11 +9,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from presentation.routers import products
 
 
-def create_app(version: str, environment: str) -> FastAPI:
+def create_app(version: str, environment: str, cloud_provider: str) -> FastAPI:
     """Create and configure FastAPI application"""
 
     inventory_app = FastAPI(
-        title="Dunder Mifflin Inventory Service",
+        title=f"Dunder Mifflin Inventory Service on {cloud_provider}",
         description="A Domain-Driven Design API for managing paper products inventory",
         version=f"{version} - {environment.upper()}",
         docs_url="/swagger",
@@ -41,6 +41,8 @@ def create_app(version: str, environment: str) -> FastAPI:
     return inventory_app
 
 
-app = create_app(version="0.0.13", environment=os.environ["ENVIRONMENT"])
+app = create_app(
+    version="0.0.13", environment=os.environ["ENVIRONMENT"], cloud_provider=os.environ.get("CLOUD_PROVIDER", "CLOUD")
+)
 # Include routers
 app.include_router(products.router, prefix="/products", tags=["Products"])
