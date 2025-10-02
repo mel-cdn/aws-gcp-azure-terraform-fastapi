@@ -40,7 +40,7 @@ Ensure the following tools are installed:
 - **Amazon Web Services (AWS)**
     - [AWS Account](https://aws.amazon.com/)
     - [AWS CLI](https://aws.amazon.com/cli/)
-- **Microsft Azure (Azure)**
+- **Microsoft Azure (Azure)**
     - [Azure Account](https://azure.microsoft.com/)
     - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/?view=azure-cli-latest)
 - **Docker**
